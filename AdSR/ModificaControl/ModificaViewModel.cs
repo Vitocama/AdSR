@@ -13,8 +13,8 @@ namespace AdSR.ModificaControl
     {
         private readonly IProtocolliRepository _protocolliRepository;
         private Window _window;
-
         private Protocolli _marsauSelezionato;
+
         public Protocolli MarsauSelezionato
         {
             get => _marsauSelezionato;
@@ -24,6 +24,20 @@ namespace AdSR.ModificaControl
                 {
                     _marsauSelezionato = value;
                     OnPropertyChanged(nameof(MarsauSelezionato));
+                    OnPropertyChanged(nameof(Argomento));
+                }
+            }
+        }
+
+        public string Argomento
+        {
+            get => _marsauSelezionato?.Argomento;
+            set
+            {
+                if (_marsauSelezionato != null && _marsauSelezionato.Argomento != value)
+                {
+                    _marsauSelezionato.Argomento = value;
+                    OnPropertyChanged(nameof(Argomento));
                 }
             }
         }
@@ -31,15 +45,11 @@ namespace AdSR.ModificaControl
         public ICommand SalvaCommand { get; }
         public ICommand AnnullaCommand { get; }
 
-
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ModificaViewModel(IProtocolliRepository protocolliRepository)
         {
             _protocolliRepository = protocolliRepository;
-
-            
 
             SalvaCommand = new RelayCommand(Salva);
             AnnullaCommand = new RelayCommand(Annulla);
@@ -63,11 +73,9 @@ namespace AdSR.ModificaControl
             try
             {
                 _protocolliRepository.ProtocolliUpdate(MarsauSelezionato);
-
                 MessageBox.Show("Modifiche salvate correttamente.", "Successo",
                     MessageBoxButton.OK, MessageBoxImage.Information);
 
-                
                 _window?.Close();
             }
             catch (Exception ex)

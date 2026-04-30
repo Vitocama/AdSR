@@ -385,35 +385,36 @@
 
             <!-- ========== DATAGRID ========== -->
             <DataGrid x:Name="DataGridMarsau"
-                      ItemsSource="{Binding MarsauFiltratiLista}"
-                      SelectedItem="{Binding MarsauSelezionato}"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False"
-                      CanUserDeleteRows="False"
-                      CanUserResizeRows="False"
-                      IsReadOnly="True"
-                      Visibility="{Binding IsFormVisible, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
-                      Margin="12"
-                      RowHeight="48"
-                      FontSize="20">
+          ItemsSource="{Binding MarsauFiltratiLista}"
+          SelectedItem="{Binding MarsauSelezionato}"
+          AutoGenerateColumns="False"
+          CanUserAddRows="False"
+          CanUserDeleteRows="False"
+          CanUserResizeRows="False"
+          IsReadOnly="True"
+          ColumnWidth="500"
+          Visibility="{Binding IsFormVisible, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
+          Margin="12"
+          RowHeight="48"
+          FontSize="20">
 
                 <DataGrid.InputBindings>
                     <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding apriDatiMarsau}"/>
                 </DataGrid.InputBindings>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="DITTA" Binding="{Binding Ditta}" Width="150"/>
+                    <DataGridTextColumn Header="DITTA" Binding="{Binding Ditta}" />
 
                     <!-- MARSAU evidenziato -->
                     <DataGridTextColumn Header="MARSAU"
                                         Binding="{Binding Marsau, Converter={StaticResource TroncaMarsauConverter}}"
-                                        Width="180">
+                                        >
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock" BasedOn="{StaticResource MarsauCellStyle}"/>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <DataGridTextColumn Header="DATA MARSAU" Binding="{Binding MarsauData}" Width="110"/>
+                    <DataGridTextColumn Header="DATA MARSAU" Binding="{Binding MarsauData}" />
                    
                 </DataGrid.Columns>
             </DataGrid>

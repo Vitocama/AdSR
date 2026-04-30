@@ -146,7 +146,8 @@ namespace AdSR.MarsauControl
 
         private void Salva()
         {
-            string random = new Random(1000).Next(10000, 99999).ToString();
+            // Random condiviso a livello di classe (vedi sotto), oppure usa Guid
+            string random = Guid.NewGuid().ToString("N").Substring(0, 5).ToUpper();
 
             if (string.IsNullOrWhiteSpace(NuovoMarsau.Marsau) &&
                 string.IsNullOrWhiteSpace(NuovoMarsau.Rdo) &&
@@ -159,7 +160,7 @@ namespace AdSR.MarsauControl
 
             try
             {
-                // Gestione sicura del campo Giorni (può essere null o stringa breve)
+                // Gestione sicura del campo Giorni
                 string giorni = NuovoMarsau.Giorni;
                 if (!string.IsNullOrWhiteSpace(giorni) && giorni.Length >= 10)
                 {
@@ -168,7 +169,6 @@ namespace AdSR.MarsauControl
 
                 var nuovoMarsau = new Protocolli
                 {
-                    // ─── DATI IDENTIFICATIVI ───
                     Marsau = $"{NuovoMarsau.Marsau}-{random}",
                     MarsauData = NuovoMarsau.MarsauData,
                     Ditta = NuovoMarsau.Ditta,
@@ -177,36 +177,24 @@ namespace AdSR.MarsauControl
                     Atto = NuovoMarsau.Atto,
                     Contratto = NuovoMarsau.Contratto,
                     DataIntroduzione = NuovoMarsau.DataIntroduzione,
-
-                    // ─── RICHIESTA E IMPORTI ───
                     Richiesta = NuovoMarsau.Richiesta,
                     Lotto = NuovoMarsau.Lotto,
                     Importo = NuovoMarsau.Importo,
                     Giorni = giorni,
                     Ric = NuovoMarsau.Ric,
-
-                    // ─── FORNITURE E SISTEMA ───
                     Forniture = NuovoMarsau.Forniture,
                     Siga45 = NuovoMarsau.Siga45,
-
-                    // ─── CRE / DDT / JOSH ───
                     Cre = NuovoMarsau.Cre,
                     DataCre = NuovoMarsau.DataCre,
                     Josh = NuovoMarsau.Josh,
                     Ddt = NuovoMarsau.Ddt,
                     DataDdt = NuovoMarsau.DataDdt,
-
-                    // ─── FATTURAZIONE ───
                     Fattura = NuovoMarsau.Fattura,
                     DataFattura = NuovoMarsau.DataFattura,
                     ImportoFattura = NuovoMarsau.ImportoFattura,
-
-                    // ─── BDC / COLLAUDO ───
                     Bdc = NuovoMarsau.Bdc,
                     DataBdc = NuovoMarsau.DataBdc,
                     Collaudo = NuovoMarsau.Collaudo,
-
-                    // ─── ALTRO ───
                     PdC = NuovoMarsau.PdC,
                     Cartella = NuovoMarsau.Cartella,
                     Note = NuovoMarsau.Note
@@ -214,13 +202,8 @@ namespace AdSR.MarsauControl
 
                 _protocolliRepository.ProtocolliInsert(nuovoMarsau);
 
-                // Ricarica il DataGrid
                 RicaricaLista();
-
-                // Nascondi il form
                 IsFormVisible = false;
-
-                // Resetta il form
                 NuovoMarsau = new Protocolli();
 
                 MessageBox.Show("Marsau salvato con successo!", "Successo",
@@ -228,7 +211,12 @@ namespace AdSR.MarsauControl
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Errore: " + ex.Message, "Errore",
+                // 🚨 Mostra anche l'eccezione interna - molto utile per debug EF Core/SQLite
+                string messaggio = "Errore: " + ex.Message;
+                if (ex.InnerException != null)
+                    messaggio += "\n\nDettaglio: " + ex.InnerException.Message;
+
+                MessageBox.Show(messaggio, "Errore",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

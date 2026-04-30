@@ -85,6 +85,7 @@ namespace AdSR.ServiceRepository
                     existing.Bdc = protocollo.Bdc;
                     existing.Collaudo = protocollo.Collaudo;
                     existing.Cartella=protocollo.Cartella;
+                    existing.Argomento = protocollo.Argomento;
 
                     db.SaveChanges();
                 }

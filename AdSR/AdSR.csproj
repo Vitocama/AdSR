@@ -86,6 +86,7 @@
     <Compile Include="ModificaControl\ModificaViewModel.cs" />
     <Compile Include="ServiceRepository\IProtocolliRepository.cs" />
     <Compile Include="ServiceRepository\ProtocolliService.cs" />
+    <Compile Include="StampaControl\Stampa.cs" />
     <Page Include="DatiMarsauControl\DatiMarsauView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

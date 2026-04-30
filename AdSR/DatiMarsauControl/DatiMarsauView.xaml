@@ -27,11 +27,6 @@
             <Setter Property="Margin" Value="0,15,0,5"/>
         </Style>
 
-        <!-- ============================================================
-             COMBOBOX STYLE - Tema Navy/Oro Marina Militare
-             ============================================================ -->
-
-        <!-- Stile per i singoli ComboBoxItem -->
         <Style x:Key="ComboBoxItemStyle" TargetType="ComboBoxItem">
             <Setter Property="Foreground" Value="#FFFFFF"/>
             <Setter Property="Background" Value="#0F2044"/>
@@ -65,7 +60,6 @@
             </Setter>
         </Style>
 
-        <!-- Stile principale del ComboBox -->
         <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
             <Setter Property="Foreground" Value="#FFFFFF"/>
             <Setter Property="Background" Value="#162840"/>
@@ -87,7 +81,6 @@
                                 <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
 
-                            <!-- Bordo principale -->
                             <Border x:Name="MainBorder"
                                     Grid.ColumnSpan="2"
                                     Background="{TemplateBinding Background}"
@@ -95,7 +88,6 @@
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="3"/>
 
-                            <!-- ToggleButton trasparente che copre tutto per aprire il popup -->
                             <ToggleButton x:Name="ToggleButton"
                                           Grid.ColumnSpan="2"
                                           Background="Transparent"
@@ -110,7 +102,6 @@
                                 </ToggleButton.Template>
                             </ToggleButton>
 
-                            <!-- Testo dell'elemento selezionato -->
                             <ContentPresenter x:Name="ContentSite"
                                               Grid.Column="0"
                                               Content="{TemplateBinding SelectionBoxItem}"
@@ -121,7 +112,6 @@
                                               HorizontalAlignment="Left"
                                               IsHitTestVisible="False"/>
 
-                            <!-- Freccia -->
                             <Path x:Name="Arrow"
                                   Grid.Column="1"
                                   HorizontalAlignment="Center"
@@ -130,7 +120,6 @@
                                   Fill="{StaticResource Gold}"
                                   IsHitTestVisible="False"/>
 
-                            <!-- Popup con la lista -->
                             <Popup x:Name="Popup"
                                    Grid.ColumnSpan="2"
                                    Placement="Bottom"
@@ -274,12 +263,17 @@
                     </StackPanel>
                 </Grid>
 
-                <!-- Riga: Argomento -->
-                <StackPanel Margin="0,0,0,10">
+                <!-- ══════════ ARGOMENTO (multilinea, altezza fissa per evitare sovrapposizioni) ══════════ -->
+                <StackPanel Margin="0,0,0,15">
                     <TextBlock Text="Argomento:" Style="{StaticResource LabelStyle}"/>
                     <TextBox Text="{Binding MarsauSelezionato.Argomento, Mode=OneWay}"
                              Style="{StaticResource InputStyle}"
-                             IsReadOnly="True"/>
+                             IsReadOnly="True"
+                             Height="120"
+                             TextWrapping="Wrap"
+                             AcceptsReturn="True"
+                             VerticalScrollBarVisibility="Auto"
+                             VerticalContentAlignment="Top"/>
                 </StackPanel>
 
                 <!-- Riga: Atto, Contratto -->
@@ -325,7 +319,7 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0">
-                        <TextBlock Text="Ric:" Style="{StaticResource LabelStyle}"/>
+                        <TextBlock Text="Richiesta:" Style="{StaticResource LabelStyle}"/>
                         <TextBox Text="{Binding MarsauSelezionato.Richiesta, Mode=OneWay}"
                                  Style="{StaticResource InputStyle}"
                                  IsReadOnly="True"/>
@@ -376,8 +370,8 @@
                 <StackPanel Margin="0,0,0,10">
                     <TextBlock Text="Forniture:" Style="{StaticResource LabelStyle}"/>
                     <TextBox Text="{Binding MarsauSelezionato.Forniture, Mode=OneWay}"
-          Style="{StaticResource InputStyle}"
-          IsReadOnly="True"/>
+                             Style="{StaticResource InputStyle}"
+                             IsReadOnly="True"/>
                 </StackPanel>
 
                 <StackPanel Margin="0,0,0,10">
@@ -431,7 +425,7 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0">
-                        <TextBlock Text="DDT(Documento di Trasporto):" Style="{StaticResource LabelStyle}"/>
+                        <TextBlock Text="DDT (Documento di Trasporto):" Style="{StaticResource LabelStyle}"/>
                         <TextBox Text="{Binding MarsauSelezionato.Ddt, Mode=OneWay}"
                                  Style="{StaticResource InputStyle}"
                                  IsReadOnly="True"/>
@@ -557,7 +551,8 @@
 
                     <Button Style="{StaticResource ButtonStyle}"
                             Command="{Binding OpenModificaCommand}"
-                            Padding="20,8">
+                            Padding="20,8"
+                            Margin="0,0,10,0">
                         <StackPanel Orientation="Horizontal">
                             <Path Data="M12,2 L16,6 L7,15 L2,16 L3,11 Z
                                         M10,4 L14,8
@@ -574,18 +569,19 @@
                     </Button>
 
                     <Button Style="{StaticResource ButtonStyle}"
-        Command="{Binding OpenCartellaCommand}"
-        Padding="20,8"
-        Margin="0,0,10,0">
+                            Command="{Binding StampaCommand}"
+                            Padding="20,8">
                         <StackPanel Orientation="Horizontal">
-                            <Path Data="M2,5 L7,5 L9,7 L14,7 L14,13 L2,13 Z"
-              Stroke="#0F2044"
-              StrokeThickness="1.6"
-              StrokeLineJoin="Round"
-              Fill="Transparent"
-              Width="16" Height="16"
-              Stretch="Uniform"
-              Margin="0,0,8,0"/>
+                            <Path Data="M4,2 L12,2 L12,6 L4,6 Z
+                                        M2,6 L14,6 L14,11 L2,11 Z
+                                        M4,11 L12,11 L12,15 L4,15 Z"
+                                  Stroke="#0F2044"
+                                  StrokeThickness="1.6"
+                                  StrokeLineJoin="Round"
+                                  Fill="Transparent"
+                                  Width="16" Height="16"
+                                  Stretch="Uniform"
+                                  Margin="0,0,8,0"/>
                             <TextBlock Text="STAMPA" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>

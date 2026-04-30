@@ -27,6 +27,20 @@ namespace AdSR.DatiMarsau
                 {
                     _marsauSelezionato = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(MarsauSelezionato)));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Argomento)));
+                }
+            }
+        }
+
+        public string Argomento
+        {
+            get => _marsauSelezionato?.Argomento;
+            set
+            {
+                if (_marsauSelezionato != null && _marsauSelezionato.Argomento != value)
+                {
+                    _marsauSelezionato.Argomento = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Argomento)));
                 }
             }
         }
@@ -34,6 +48,7 @@ namespace AdSR.DatiMarsau
         public ICommand ChiudiCommand { get; }
         public ICommand OpenModificaCommand { get; }
         public ICommand OpenCartellaCommand { get; }
+        public ICommand StampaCommand { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -43,6 +58,28 @@ namespace AdSR.DatiMarsau
             ChiudiCommand = new RelayCommand(Chiudi);
             OpenModificaCommand = new RelayCommand(ApriModifica);
             OpenCartellaCommand = new RelayCommand(ApriCartella);
+            StampaCommand = new RelayCommand(Stampa);
+        }
+
+        private void Stampa()
+        {
+            if (MarsauSelezionato == null)
+            {
+                MessageBox.Show("Nessun protocollo selezionato.",
+                    "Attenzione", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            try
+            {
+                Stampa stampa = new Stampa();
+                stampa.GeneraEApri(MarsauSelezionato);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Errore durante la stampa:\n" + ex.Message,
+                    "Stampa Marsau", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void ApriCartella()
@@ -91,7 +128,6 @@ namespace AdSR.DatiMarsau
             view.DataContext = vm;
             view.ShowDialog();
 
-            // Ricarica i dati freschi dal DB dopo la chiusura della finestra di modifica
             SetMarsau(MarsauSelezionato);
         }
 
@@ -109,7 +145,6 @@ namespace AdSR.DatiMarsau
             {
                 var refreshed = _protocolliRepository.ProtocolliGetAll()
                     .FirstOrDefault(p => p.Marsau == marsau.Marsau);
-
                 MarsauSelezionato = refreshed ?? marsau;
             }
             catch
