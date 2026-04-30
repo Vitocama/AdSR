@@ -1,0 +1,20 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Stile per Border che cambia colore al passaggio del mouse -->
+    <Style x:Key="BorderMenu" TargetType="Border">
+        <!-- Stato normale -->
+
+
+        <Setter Property="Background" Value="Transparent"/>
+
+        <!-- Trigger hover -->
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Black"/>
+                <Setter Property="CornerRadius" Value="0,10,10,0"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,334 @@
+﻿<Window x:Class="AdSR.ModificaControl.ModificaView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdSR.ModificaControl"
+        mc:Ignorable="d"
+        Title="Modifica Protocollo" Height="1300" Width="1300"
+        Background="#0F2044"
+        
+        WindowState="Maximized"
+        ResizeMode="CanResizeWithGrip"
+        
+        
+        >
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="Gold" Color="#C9A84C"/>
+        <SolidColorBrush x:Key="GoldLight" Color="#E8C97A"/>
+        <SolidColorBrush x:Key="NavyDark" Color="#0F2044"/>
+        <SolidColorBrush x:Key="NavyMedium" Color="#2A456E"/>
+
+        <Style x:Key="WindowTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StaticResource Gold}"/>
+            <Setter Property="Margin" Value="16,12,0,12"/>
+        </Style>
+
+        <Style x:Key="FieldLabelStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{StaticResource Gold}"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+        </Style>
+
+        <Style x:Key="FieldTextBoxStyle" TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#162840"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Gold}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="Height" Value="34"/>
+        </Style>
+
+        <Style x:Key="MultilineTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource FieldTextBoxStyle}">
+            <Setter Property="Height" Value="90"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        </Style>
+
+        <Style x:Key="ActionButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{StaticResource NavyDark}"/>
+            <Setter Property="Background" Value="{StaticResource Gold}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource GoldLight}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="24,8"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource GoldLight}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CancelButtonStyle" TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}">
+            <Setter Property="Background" Value="#666666"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#888888"/>
+        </Style>
+
+        <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StaticResource GoldLight}"/>
+            <Setter Property="Margin" Value="0,10,0,12"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource NavyDark}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- HEADER -->
+        <Border Grid.Row="0" Background="{StaticResource NavyMedium}" 
+                BorderBrush="{StaticResource Gold}" BorderThickness="0,0,0,2">
+            <TextBlock Text="Modifica Protocollo" Style="{StaticResource WindowTitleStyle}"/>
+        </Border>
+
+        <!-- CONTENUTO -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="20">
+            <StackPanel>
+
+                <!-- SEZIONE: DATI GENERALI -->
+                <TextBlock Text="▸ DATI GENERALI" Style="{StaticResource SectionHeaderStyle}"/>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Ditta:" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Ditta, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FieldTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Marsau:" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Marsau, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FieldTextBoxStyle}" IsReadOnly="True"/>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="RDO(Richiesta di Offerta):" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Rdo, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FieldTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Atto:" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Atto, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FieldTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="4">
+                        <TextBlock Text="Contratto:" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Contratto, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FieldTextBoxStyle}"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- SEZIONE: RICHIESTA E IMPORTI -->
+                <TextBlock Text="▸ RICHIESTA E IMPORTI" Style="{StaticResource SectionHeaderStyle}"/>
+
+                <StackPanel Margin="0,0,0,12">
+                    <TextBlock Text="Ric:" Style="{StaticResource FieldLabelStyle}"/>
+                    <TextBox Text="{Binding MarsauSelezionato.Richiesta, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource FieldTextBoxStyle}"/>
+                </StackPanel>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Importo:" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Importo, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FieldTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Giorni:" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Giorni, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FieldTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="4">
+                        <TextBlock Text="Ric:" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Ric, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FieldTextBoxStyle}"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- SEZIONE: FORNITURE -->
+                <TextBlock Text="▸ FORNITURE E SISTEMA" Style="{StaticResource SectionHeaderStyle}"/>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Siga45:" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Siga45, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FieldTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="BDC:" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Bdc, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FieldTextBoxStyle}"/>
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel Margin="0,0,0,12">
+                    <TextBlock Text="Forniture:" Style="{StaticResource FieldLabelStyle}"/>
+                    <TextBox Text="{Binding MarsauSelezionato.Forniture, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource MultilineTextBoxStyle}"/>
+                </StackPanel>
+                <StackPanel Margin="0,0,0,12">
+                    <TextBlock Text="Link:" Style="{StaticResource FieldLabelStyle}"/>
+                    <TextBox Text="{Binding MarsauSelezionato.Cartella, UpdateSourceTrigger=PropertyChanged}"
+             Style="{StaticResource MultilineTextBoxStyle}"/>
+                </StackPanel>
+
+                <!-- SEZIONE: PERSONALE -->
+                <TextBlock Text="▸ PERSONALE E DATE" Style="{StaticResource SectionHeaderStyle}"/>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="CRE:" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Cre, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FieldTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="DDT(Documento di Trasporto):" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Ddt, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FieldTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="4">
+                        <TextBlock Text="Data Introduzione:" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.DataIntroduzione, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FieldTextBoxStyle}"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- SEZIONE: FATTURAZIONE -->
+                <TextBlock Text="▸ FATTURAZIONE E COLLAUDO" Style="{StaticResource SectionHeaderStyle}"/>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Fattura:" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Fattura, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FieldTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Importo Fattura:" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.ImportoFattura, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FieldTextBoxStyle}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="4">
+                        <TextBlock Text="Collaudo:" Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Collaudo, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{StaticResource FieldTextBoxStyle}"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- SEZIONE: NOTE -->
+                <TextBlock Text="▸ NOTE" Style="{StaticResource SectionHeaderStyle}"/>
+
+                <StackPanel Margin="0,0,0,12">
+                    <TextBlock Text="Note:" Style="{StaticResource FieldLabelStyle}"/>
+                    <TextBox Text="{Binding MarsauSelezionato.Note, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{StaticResource MultilineTextBoxStyle}"
+                             Height="120"/>
+                </StackPanel>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- FOOTER CON PULSANTI -->
+        <Border Grid.Row="2" Background="{StaticResource NavyMedium}" 
+                BorderBrush="{StaticResource Gold}" BorderThickness="0,2,0,0" 
+                Padding="16,12">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Salva Modifiche"
+                        Style="{StaticResource ActionButtonStyle}"
+                        Command="{Binding SalvaCommand}"
+                        Margin="0,0,10,0"/>
+                <Button Content="Annulla"
+                        Style="{StaticResource CancelButtonStyle}"
+                        Command="{Binding AnnullaCommand}"/>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Window>

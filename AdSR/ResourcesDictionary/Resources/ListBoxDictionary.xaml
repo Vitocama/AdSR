@@ -1,0 +1,88 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="ListBox" x:Key="ListBox1">
+        <Setter Property="Margin" Value="40,0,40,0"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#1F3657" Offset="0.0"/>
+                    <GradientStop Color="#2F5078" Offset="0.5"/>
+                    <GradientStop Color="#1F3657" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Padding" Value="4,2,8,2"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <Style TargetType="ListBox" x:Key="ListBox2">
+        <Setter Property="Margin" Value="40,0,10,0"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#1F3657" Offset="0.0"/>
+                    <GradientStop Color="#2F5078" Offset="0.5"/>
+                    <GradientStop Color="#1F3657" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Padding" Value="4,2,8,2"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <Style TargetType="ListBox" x:Key="ListBox3">
+        <Setter Property="Margin" Value="40,0,40,0"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#1F3657" Offset="0.0"/>
+                    <GradientStop Color="#2F5078" Offset="0.5"/>
+                    <GradientStop Color="#1F3657" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Padding" Value="8,4,12,4"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <Style TargetType="ListBoxItem">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding" Value="4,4,8,4"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#2F5078" Offset="0.0"/>
+                            <GradientStop Color="#3F70A8" Offset="0.5"/>
+                            <GradientStop Color="#2F5078" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#1F3657" Offset="0.0"/>
+                            <GradientStop Color="#2F5078" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

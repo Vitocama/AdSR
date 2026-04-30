@@ -1,0 +1,596 @@
+﻿<Window x:Class="AdSR.DatiMarsau.DatiMarsauView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdSR.DatiMarsau"
+        xmlns:common="clr-namespace:AdSR.Common"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Dettagli Marsau" Height="800" Width="1300"
+        Background="#0F2044"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="Gold" Color="#C9A84C"/>
+        <SolidColorBrush x:Key="GoldLight" Color="#E8C97A"/>
+        <SolidColorBrush x:Key="NavyDark" Color="#0F2044"/>
+        <SolidColorBrush x:Key="NavyMedium" Color="#2A456E"/>
+
+        <common:TroncaMarsauConverter x:Key="TroncaMarsauConverter"/>
+
+        <Style TargetType="TextBlock" x:Key="LabelStyle">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{StaticResource Gold}"/>
+            <Setter Property="Margin" Value="0,15,0,5"/>
+        </Style>
+
+        <!-- ============================================================
+             COMBOBOX STYLE - Tema Navy/Oro Marina Militare
+             ============================================================ -->
+
+        <!-- Stile per i singoli ComboBoxItem -->
+        <Style x:Key="ComboBoxItemStyle" TargetType="ComboBoxItem">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#0F2044"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}"
+                                BorderThickness="0">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Left"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#162D5C"/>
+                                <Setter Property="Foreground" Value="#E8C97A"/>
+                            </Trigger>
+                            <Trigger Property="IsHighlighted" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#C9A84C"/>
+                                <Setter Property="Foreground" Value="#0A1628"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Stile principale del ComboBox -->
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#162840"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Gold}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="MinHeight" Value="38"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource ComboBoxItemStyle}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Bordo principale -->
+                            <Border x:Name="MainBorder"
+                                    Grid.ColumnSpan="2"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="3"/>
+
+                            <!-- ToggleButton trasparente che copre tutto per aprire il popup -->
+                            <ToggleButton x:Name="ToggleButton"
+                                          Grid.ColumnSpan="2"
+                                          Background="Transparent"
+                                          BorderThickness="0"
+                                          Focusable="False"
+                                          ClickMode="Press"
+                                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border Background="Transparent"/>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+
+                            <!-- Testo dell'elemento selezionato -->
+                            <ContentPresenter x:Name="ContentSite"
+                                              Grid.Column="0"
+                                              Content="{TemplateBinding SelectionBoxItem}"
+                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                              Margin="{TemplateBinding Padding}"
+                                              VerticalAlignment="Center"
+                                              HorizontalAlignment="Left"
+                                              IsHitTestVisible="False"/>
+
+                            <!-- Freccia -->
+                            <Path x:Name="Arrow"
+                                  Grid.Column="1"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Data="M 0 0 L 8 0 L 4 5 Z"
+                                  Fill="{StaticResource Gold}"
+                                  IsHitTestVisible="False"/>
+
+                            <!-- Popup con la lista -->
+                            <Popup x:Name="Popup"
+                                   Grid.ColumnSpan="2"
+                                   Placement="Bottom"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   PopupAnimation="Slide">
+                                <Grid x:Name="DropDown"
+                                      SnapsToDevicePixels="True"
+                                      MinWidth="{TemplateBinding ActualWidth}"
+                                      MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder"
+                                            Background="#0F2044"
+                                            BorderBrush="{StaticResource Gold}"
+                                            BorderThickness="1"
+                                            CornerRadius="0,0,3,3"/>
+                                    <ScrollViewer Margin="1" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True"
+                                                    KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="MainBorder" Property="BorderBrush" Value="{StaticResource GoldLight}"/>
+                                <Setter TargetName="Arrow" Property="Fill" Value="{StaticResource GoldLight}"/>
+                            </Trigger>
+                            <Trigger Property="IsDropDownOpen" Value="True">
+                                <Setter TargetName="MainBorder" Property="BorderBrush" Value="{StaticResource GoldLight}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="#66FFFFFF"/>
+                                <Setter Property="Opacity" Value="0.6"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="SectionHeaderStyle">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StaticResource GoldLight}"/>
+            <Setter Property="Margin" Value="0,20,0,8"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="InputStyle">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="#162840"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Gold}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="ButtonStyle">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#0F2044"/>
+            <Setter Property="Background" Value="{StaticResource Gold}"/>
+            <Setter Property="Padding" Value="20,8"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource NavyDark}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- HEADER -->
+        <Border Grid.Row="0" Background="{StaticResource NavyMedium}"
+                BorderBrush="{StaticResource Gold}" BorderThickness="0,0,0,2" Padding="16,12">
+            <TextBlock FontSize="18" FontWeight="Bold" Foreground="{StaticResource Gold}">
+                <Run Text="Dettagli Marsau - "/>
+                <Run Text="{Binding MarsauSelezionato.Marsau, Converter={StaticResource TroncaMarsauConverter}, Mode=OneWay}"/>
+            </TextBlock>
+        </Border>
+
+        <!-- CONTENUTO -->
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      Margin="0,10,0,10">
+            <StackPanel Width="1100" HorizontalAlignment="Center">
+
+                <!-- ══════════ DATI IDENTIFICATIVI ══════════ -->
+                <TextBlock Text="▸ DATI IDENTIFICATIVI" Style="{StaticResource SectionHeaderStyle}"/>
+
+                <!-- Riga: Marsau, Data Marsau -->
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Marsau:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Marsau, Converter={StaticResource TroncaMarsauConverter}, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Data Marsau:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.MarsauData, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Riga: Ditta, RDO -->
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Ditta:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Ditta, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="RDO:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Rdo, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Riga: Argomento -->
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="Argomento:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Text="{Binding MarsauSelezionato.Argomento, Mode=OneWay}"
+                             Style="{StaticResource InputStyle}"
+                             IsReadOnly="True"/>
+                </StackPanel>
+
+                <!-- Riga: Atto, Contratto -->
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Atto:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Atto, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Contratto:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Contratto, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Riga: Data Introduzione -->
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="Data Introduzione:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Text="{Binding MarsauSelezionato.DataIntroduzione, Mode=OneWay}"
+                             Style="{StaticResource InputStyle}"
+                             IsReadOnly="True"/>
+                </StackPanel>
+
+                <!-- ══════════ RICHIESTA E IMPORTI ══════════ -->
+                <TextBlock Text="▸ RICHIESTA E IMPORTI" Style="{StaticResource SectionHeaderStyle}"/>
+
+                <!-- Riga: Richiesta, Lotto -->
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Ric:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Richiesta, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Lotto:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Lotto, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Riga: Importo, Giorni, RIC -->
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Importo:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Importo, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Giorni:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Giorni, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="4">
+                        <TextBlock Text="RIC:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Ric, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- ══════════ FORNITURE E SISTEMA ══════════ -->
+                <TextBlock Text="▸ FORNITURE E SISTEMA" Style="{StaticResource SectionHeaderStyle}"/>
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="Forniture:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Text="{Binding MarsauSelezionato.Forniture, Mode=OneWay}"
+          Style="{StaticResource InputStyle}"
+          IsReadOnly="True"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="Siga45:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Text="{Binding MarsauSelezionato.Siga45, Mode=OneWay}"
+                             Style="{StaticResource InputStyle}"
+                             IsReadOnly="True"/>
+                </StackPanel>
+
+                <!-- ══════════ CRE / DDT / JOSH ══════════ -->
+                <TextBlock Text="▸ CRE / DDT / JOSH" Style="{StaticResource SectionHeaderStyle}"/>
+
+                <!-- Riga: CRE, Data CRE, Josh -->
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="CRE:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Cre, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Data CRE:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.DataCre, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="4">
+                        <TextBlock Text="Josh:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Josh, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Riga: DDT, Data DDT -->
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="DDT(Documento di Trasporto):" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Ddt, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Data DDT:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.DataDdt, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- ══════════ FATTURAZIONE ══════════ -->
+                <TextBlock Text="▸ FATTURAZIONE" Style="{StaticResource SectionHeaderStyle}"/>
+
+                <!-- Riga: Fattura, Data Fattura, Importo Fattura -->
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Fattura:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Fattura, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Data Fattura:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.DataFattura, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="4">
+                        <TextBlock Text="Importo Fattura:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.ImportoFattura, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- ══════════ BDC / COLLAUDO ══════════ -->
+                <TextBlock Text="▸ BDC / COLLAUDO" Style="{StaticResource SectionHeaderStyle}"/>
+
+                <!-- Riga: BDC, Data BDC, Collaudo -->
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="BDC:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Bdc, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Data BDC:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.DataBdc, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="4">
+                        <TextBlock Text="Collaudo:" Style="{StaticResource LabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Collaudo, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- ══════════ ALTRO ══════════ -->
+                <TextBlock Text="▸ ALTRO" Style="{StaticResource SectionHeaderStyle}"/>
+
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="PdC (Piano di Classificazione):" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Text="{Binding MarsauSelezionato.PdC, Mode=OneWay}"
+                             Style="{StaticResource InputStyle}"
+                             IsReadOnly="True"/>
+                </StackPanel>
+
+                <!-- Note -->
+                <StackPanel Margin="0,0,0,10">
+                    <TextBlock Text="Note:" Style="{StaticResource LabelStyle}"/>
+                    <TextBox Text="{Binding MarsauSelezionato.Note, Mode=OneWay}"
+                             Style="{StaticResource InputStyle}"
+                             IsReadOnly="True"
+                             Height="80"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"/>
+                </StackPanel>
+
+                <!-- Pulsanti -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,20">
+                    <Button Style="{StaticResource ButtonStyle}"
+                            Command="{Binding OpenCartellaCommand}"
+                            Padding="20,8"
+                            Margin="0,0,10,0">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M2,5 L7,5 L9,7 L14,7 L14,13 L2,13 Z"
+                                  Stroke="#0F2044"
+                                  StrokeThickness="1.6"
+                                  StrokeLineJoin="Round"
+                                  Fill="Transparent"
+                                  Width="16" Height="16"
+                                  Stretch="Uniform"
+                                  Margin="0,0,8,0"/>
+                            <TextBlock Text="APRI CARTELLA" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Style="{StaticResource ButtonStyle}"
+                            Command="{Binding OpenModificaCommand}"
+                            Padding="20,8">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M12,2 L16,6 L7,15 L2,16 L3,11 Z
+                                        M10,4 L14,8
+                                        M3,11 L7,15"
+                                  Stroke="#0F2044"
+                                  StrokeThickness="1.6"
+                                  StrokeLineJoin="Round"
+                                  Fill="Transparent"
+                                  Width="16" Height="16"
+                                  Stretch="Uniform"
+                                  Margin="0,0,8,0"/>
+                            <TextBlock Text="MODIFICA DATI" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Style="{StaticResource ButtonStyle}"
+        Command="{Binding OpenCartellaCommand}"
+        Padding="20,8"
+        Margin="0,0,10,0">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="M2,5 L7,5 L9,7 L14,7 L14,13 L2,13 Z"
+              Stroke="#0F2044"
+              StrokeThickness="1.6"
+              StrokeLineJoin="Round"
+              Fill="Transparent"
+              Width="16" Height="16"
+              Stretch="Uniform"
+              Margin="0,0,8,0"/>
+                            <TextBlock Text="STAMPA" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>
