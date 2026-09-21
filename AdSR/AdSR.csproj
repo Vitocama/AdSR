@@ -87,6 +87,10 @@
     <Compile Include="ServiceRepository\IProtocolliRepository.cs" />
     <Compile Include="ServiceRepository\ProtocolliService.cs" />
     <Compile Include="StampaControl\Stampa.cs" />
+    <Compile Include="StampaControl\StampaViewModel.cs" />
+    <Compile Include="StampaControl\StampaView.xaml.cs">
+      <DependentUpon>StampaView.xaml</DependentUpon>
+    </Compile>
     <Page Include="DatiMarsauControl\DatiMarsauView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -173,6 +177,10 @@
     <Page Include="ResourcesDictionary\Resources\WindowDictionary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StampaControl\StampaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

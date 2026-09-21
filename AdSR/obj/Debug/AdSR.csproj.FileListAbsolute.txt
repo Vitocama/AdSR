@@ -79,3 +79,5 @@ C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\AdSR.csproj.CoreCompileInputs.ca
 C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\AdSR.csproj.Up2Date
 C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\AdSR.exe
 C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\AdSR.pdb
+C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\StampaControl\StampaView.g.cs
+C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\StampaControl\StampaView.baml

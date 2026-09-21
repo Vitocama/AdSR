@@ -26,7 +26,7 @@ namespace AdSR.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlite("Data Source=C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\AdSR.db");
+                optionsBuilder.UseSqlite(@"Data Source=C:\Users\Hirad\source\repos\AdSR\AdSR\AdSR.db");
             }
         }
 
@@ -54,6 +54,15 @@ namespace AdSR.Models
                 entity.Property(e => e.Atto).HasColumnName("ATTO");
                 entity.Property(e => e.Contratto).HasColumnName("CONTRATTO");
                 entity.Property(e => e.DataIntroduzione).HasColumnName("DATA_INTRODUZIONE");
+
+                // ═══════════════════════════════════════════════════════
+                // ATTI DI RIFERIMENTO
+                // ═══════════════════════════════════════════════════════
+                entity.Property(e => e.AA).HasColumnName("AA");
+                entity.Property(e => e.Dec).HasColumnName("DEC");
+                entity.Property(e => e.Rup).HasColumnName("RUP");
+                entity.Property(e => e.Ad).HasColumnName("AD");
+                entity.Property(e => e.Capitolo).HasColumnName("CAPITOLO");
 
                 // ═══════════════════════════════════════════════════════
                 // RICHIESTA E IMPORTI

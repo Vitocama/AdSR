@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Media;
 using AdSR.Models;
 
 namespace AdSR.Common
@@ -9,149 +10,130 @@ namespace AdSR.Common
     public class Stampa
     {
         /// <summary>
-        /// Genera un file HTML con i dati del Protocollo (Marsau)
-        /// e lo apre nel browser predefinito. Il file viene salvato
-        /// in %TEMP% con nome basato sulla ditta.
+        /// Genera un FlowDocument con i dati del Protocollo (Marsau)
+        /// e apre la finestra di stampa di Windows.
         /// </summary>
-        public void GeneraEApri(Protocolli p)
+        public void Stampa_Documento(Protocolli p)
         {
             if (p == null)
-                throw new ArgumentNullException("p");
+                throw new ArgumentNullException(nameof(p));
 
-            string nomeDitta = string.IsNullOrWhiteSpace(p.Ditta) ? "SenzaDitta" : p.Ditta;
-            string nomeFileSicuro = SanitizzaNomeFile(nomeDitta);
+            FlowDocument documento = CostruisciDocumento(p);
 
-            string nomeFile = string.Format("Marsau_{0}_{1:yyyyMMdd_HHmmss}.html",
-                                            nomeFileSicuro, DateTime.Now);
-            string percorso = Path.Combine(Path.GetTempPath(), nomeFile);
+            PrintDialog printDialog = new PrintDialog();
 
-            string html = CostruisciHtml(p);
-            File.WriteAllText(percorso, html, Encoding.UTF8);
-
-            Process.Start(new ProcessStartInfo(percorso) { UseShellExecute = true });
-        }
-
-        private string SanitizzaNomeFile(string nome)
-        {
-            char[] invalidi = Path.GetInvalidFileNameChars();
-            StringBuilder sb = new StringBuilder();
-            foreach (char c in nome)
+            if (printDialog.ShowDialog() == true)
             {
-                if (Array.IndexOf(invalidi, c) < 0 && c != ' ')
-                    sb.Append(c);
-                else
-                    sb.Append('_');
+                documento.PageWidth = printDialog.PrintableAreaWidth;
+                documento.PageHeight = printDialog.PrintableAreaHeight;
+                documento.PagePadding = new Thickness(40);
+                documento.ColumnWidth = printDialog.PrintableAreaWidth;
+
+                IDocumentPaginatorSource paginatorSource = documento;
+                printDialog.PrintDocument(paginatorSource.DocumentPaginator, "Marsau - " + p.Ditta);
             }
-            return sb.ToString();
         }
 
-        private string CostruisciHtml(Protocolli p)
+        /// <summary>
+        /// Costruisce il FlowDocument per l'anteprima (usato dal ViewModel per il binding).
+        /// </summary>
+        public FlowDocument CreaDocumentoAnteprima(Protocolli p)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("<!DOCTYPE html>");
-            sb.AppendLine("<html lang=\"it\">");
-            sb.AppendLine("<head>");
-            sb.AppendLine("<meta charset=\"UTF-8\">");
-            sb.AppendFormat("<title>Marsau - {0}</title>\n", Esc(p.Ditta));
-            sb.AppendLine("<style>");
-            sb.AppendLine(@"
-    body { font-family: 'Segoe UI', Arial, sans-serif; background: #fff;
-           color: #000000; margin: 0; padding: 30px; }
-    .header { text-align: center; padding: 10px 0 20px 0; }
-    .header h1 { margin: 0; font-size: 22px; font-weight: 600;
-                 letter-spacing: 2px; color: #000000; }
-    .lower { text-align: center; padding: 0 0 20px 0; }
-h2.argomento {
-    display: block;
-    max-width: 90%;
-    margin: 20px auto;
-    padding: 14px 20px;
-    background: #ffffff;
-    border: 1px solid #000000;
-    border-left: 4px solid #000000;
-    border-radius: 3px;
-    color: #000000;
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 1.5;
-    text-align: left;
-    text-transform: none;
-    letter-spacing: 0;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    text-transform: uppercase;
-}
-    h2.lower { margin: 0; font-size: 26px; font-weight: 700;
-               color: #000000; letter-spacing: 2px;
-               text-transform: uppercase;
-               border: none; padding: 0; }
-    .section { padding: 16px 0; border-bottom: 1px solid #000000; }
-    .section h2 { color: #000000; font-size: 14px; text-transform: uppercase;
-                  border-left: 4px solid #C9A84C; padding-left: 10px;
-                  margin: 0 0 12px 0; letter-spacing: 1px; }
-    table { width: 100%; border-collapse: collapse; }
-    table td { padding: 7px 10px; vertical-align: top; font-size: 14px; }
-    table td.label { width: 230px; font-weight: 600; color: #2A456E;
-                     background: #f9f6ed; }
-    table td.value { color: #333; border-bottom: 1px solid #eee; }
-    .footer { padding: 12px 0; font-size: 11px; color: #888;
-              text-align: right; border-top: 1px solid #000000; }
-    .toolbar { text-align: right; margin: 0 0 12px 0; }
-    .toolbar button { background: #C9A84C; color: #0F2044;
-                      border: none; padding: 8px 18px; font-weight: 600;
-                      font-family: 'Segoe UI'; font-size: 13px;
-                      cursor: pointer; border-radius: 3px; }
-    .toolbar button:hover { background: #E8C97A; }
-    @media print {
-        body { padding: 0; }
-        .toolbar { display: none; }
-    }
-");
-            sb.AppendLine("</style>");
-            sb.AppendLine("</head>");
-            sb.AppendLine("<body>");
+            if (p == null)
+                throw new ArgumentNullException(nameof(p));
 
-            sb.AppendLine("<div class=\"toolbar\">");
-            sb.AppendLine("<button onclick=\"window.print()\">Stampa</button>");
-            sb.AppendLine("</div>");
-
-            sb.AppendLine("<div class=\"container\">");
-
-            // Header
-            sb.AppendLine("<div class=\"header\">");
-            sb.AppendLine("<h1>ARSENALE MILITARE MARITTIMO</h1>");
-            sb.AppendLine("<h1>AUGUSTA</h1>");
-            sb.AppendLine("<h1>SETTORE SALA RICEZIONE</h1>");
-            sb.AppendFormat("<h2>DITTA</h2>\n");
-            sb.AppendFormat("<h2 class=\"lower\">{0} del {1}</h2>\n", Esc(p.Ditta), Esc(p.MarsauData));
-            sb.AppendFormat("<h2 class=\"lower\">Richiesta {0}</h2>\n", Esc(p.Richiesta));
-            sb.AppendFormat("<h2 class=\"lower\">ATTO :{0} </h2>\n", Esc(p.Atto));
-            sb.AppendFormat("<h2 class=\"lower\"> ARGOMENTO: </h2>\n");
-            sb.AppendLine("<div style=\"text-align:center;\">");
-            sb.AppendFormat("<h2 class=\"argomento\">{0}</h2>\n", Esc(p.Argomento));
-            sb.AppendLine("</div>");
-            sb.AppendLine("</div>");
-            sb.AppendLine("</body>");
-            sb.AppendLine("</html>");
-
-            return sb.ToString();
+            return CostruisciDocumento(p);
         }
 
-        private void Riga(StringBuilder sb, string etichetta, object valore)
+        private FlowDocument CostruisciDocumento(Protocolli p)
         {
-            string val = valore == null ? "" : valore.ToString();
-            sb.AppendFormat("<tr><td class=\"label\">{0}</td><td class=\"value\">{1}</td></tr>\n",
-                            Esc(etichetta), Esc(val));
+            var doc = new FlowDocument
+            {
+                FontFamily = new FontFamily("Segoe UI"),
+                FontSize = 13,
+                PagePadding = new Thickness(40),
+                Foreground = Brushes.Black
+            };
+
+            var header1 = new Paragraph(new Run("ARSENALE MILITARE MARITTIMO"))
+            {
+                FontSize = 20,
+                FontWeight = FontWeights.SemiBold,
+                TextAlignment = TextAlignment.Center,
+                Margin = new Thickness(0, 0, 0, 2)
+            };
+            var header2 = new Paragraph(new Run("AUGUSTA"))
+            {
+                FontSize = 20,
+                FontWeight = FontWeights.SemiBold,
+                TextAlignment = TextAlignment.Center,
+                Margin = new Thickness(0, 0, 0, 2)
+            };
+            var header3 = new Paragraph(new Run("SETTORE SALA RICEZIONE"))
+            {
+                FontSize = 20,
+                FontWeight = FontWeights.SemiBold,
+                TextAlignment = TextAlignment.Center,
+                Margin = new Thickness(0, 0, 0, 20)
+            };
+
+            doc.Blocks.Add(header1);
+            doc.Blocks.Add(header2);
+            doc.Blocks.Add(header3);
+
+            doc.Blocks.Add(CreaParagrafoCentrato("DITTA", 14, FontWeights.SemiBold));
+            doc.Blocks.Add(CreaParagrafoCentrato(
+                $"{Val(p.Ditta)} del {Val(p.MarsauData)}", 22, FontWeights.Bold));
+            doc.Blocks.Add(CreaParagrafoCentrato(
+                $"Richiesta {Val(p.Richiesta)}", 22, FontWeights.Bold));
+            doc.Blocks.Add(CreaParagrafoCentrato(
+                $"ATTO: {Val(p.Atto)}", 22, FontWeights.Bold));
+            doc.Blocks.Add(CreaParagrafoCentrato("ARGOMENTO:", 22, FontWeights.Bold));
+
+            var argomentoParagraph = new Paragraph(new Run(Val(p.Argomento).ToUpperInvariant()))
+            {
+                FontSize = 15,
+                FontWeight = FontWeights.Medium,
+                Padding = new Thickness(14, 12, 14, 12),
+                Margin = new Thickness(20, 15, 20, 15),
+                TextAlignment = TextAlignment.Left
+            };
+
+            var argomentoTable = new Table();
+            var col = new TableColumn();
+            argomentoTable.Columns.Add(col);
+            var rowGroup = new TableRowGroup();
+            var row = new TableRow();
+            var cell = new TableCell(argomentoParagraph)
+            {
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(1, 1, 1, 1),
+                Padding = new Thickness(0)
+            };
+            row.Cells.Add(cell);
+            rowGroup.Rows.Add(row);
+            argomentoTable.RowGroups.Add(rowGroup);
+            argomentoTable.Margin = new Thickness(30, 10, 30, 20);
+
+            doc.Blocks.Add(argomentoTable);
+
+            return doc;
         }
 
-        private string Esc(string s)
+        private Paragraph CreaParagrafoCentrato(string testo, double fontSize, FontWeight peso)
         {
-            if (string.IsNullOrEmpty(s)) return "&nbsp;";
-            return s.Replace("&", "&amp;")
-                    .Replace("<", "&lt;")
-                    .Replace(">", "&gt;")
-                    .Replace("\"", "&quot;")
-                    .Replace("\n", "<br/>");
+            return new Paragraph(new Run(testo))
+            {
+                FontSize = fontSize,
+                FontWeight = peso,
+                TextAlignment = TextAlignment.Center,
+                Margin = new Thickness(0, 0, 0, 6)
+            };
+        }
+
+        private string Val(string s)
+        {
+            return string.IsNullOrWhiteSpace(s) ? " " : s;
         }
     }
 }

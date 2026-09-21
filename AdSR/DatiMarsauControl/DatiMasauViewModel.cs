@@ -2,6 +2,7 @@
 using AdSR.Models;
 using AdSR.ModificaControl;
 using AdSR.ServiceRepository;
+using AdSR.StampaControl;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -64,22 +65,11 @@ namespace AdSR.DatiMarsau
         private void Stampa()
         {
             if (MarsauSelezionato == null)
-            {
-                MessageBox.Show("Nessun protocollo selezionato.",
-                    "Attenzione", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
-            }
 
-            try
-            {
-                Stampa stampa = new Stampa();
-                stampa.GeneraEApri(MarsauSelezionato);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Errore durante la stampa:\n" + ex.Message,
-                    "Stampa Marsau", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            var stampaWindow = new StampaView(MarsauSelezionato);
+            stampaWindow.ShowDialog();
+          
         }
 
         private void ApriCartella()
