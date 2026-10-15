@@ -72,6 +72,12 @@ namespace AdSR.Models
         [Column("SIGA45")]
         public string Siga45 { get; set; }
 
+        [Column("FORNITURA_PARZIALE")]
+        public string FornituraParziale { get; set; }
+
+        [Column("FORNITURA_COMPLETA")]
+        public string FornituraCompleta { get; set; }
+
         // ══════════ CRE / DDT / JOSH ══════════
         [Column("CRE")]
         public string Cre { get; set; }
@@ -87,6 +93,30 @@ namespace AdSR.Models
 
         [Column("DATA_DDT")]
         public string DataDdt { get; set; }
+
+        [Column("DATA_PERVENUTO")]
+        public string Pervenuto { get; set; }
+
+        [Column("DDT_2")]
+        public string Ddt2 { get; set; }
+
+        [Column("DATA_DDT_2")]
+        public string DataDdt2 { get; set; }
+
+        [Column("DATA_PERVENUTO_2")]
+        public string Pervenuto2 { get; set; }
+
+        [Column("DDT_3")]
+        public string Ddt3 { get; set; }
+
+        [Column("DATA_DDT_3")]
+        public string DataDdt3 { get; set; }
+
+        [Column("DATA_PERVENUTO_3")]
+        public string Pervenuto3 { get; set; }
+
+        [Column("TRASMESSO")]
+        public string Trasmesso { get; set; }
 
         // ══════════ FATTURAZIONE ══════════
         [Column("FATTURA")]
@@ -108,9 +138,22 @@ namespace AdSR.Models
         [Column("COLLAUDO")]
         public string Collaudo { get; set; }
 
+        [Column("DATA_COLLAUDO")]
+        public string DataCollaudo { get; set; }
+
+        // ══════════ PROTOCOLLO ══════════
+        [Column("PROTOCOLLO")]
+        public string Protocollo { get; set; }
+
+        [Column("DATA_PROTOCOLLO")]
+        public string DataProtocollo { get; set; }
+
         // ══════════ ALTRO ══════════
         [Column("PdC")]
         public string PdC { get; set; }
+
+        [Column("PdG")]
+        public string PdG { get; set; }
 
         [Column("CARTELLA")]
         public string Cartella { get; set; }

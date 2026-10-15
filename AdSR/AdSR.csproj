@@ -75,23 +75,28 @@
     </ApplicationDefinition>
     <Compile Include="BoolToVisibilityConverter.cs" />
     <Compile Include="Converter\TroncaMarsauConverter.cs" />
-    <Compile Include="DatiMarsauControl\DatiMarsauView.xaml.cs">
+    <Compile Include="Models\DatiStampa.cs" />
+    <Compile Include="ViewModel\DatiMarsauViewModel.cs" />
+    <Compile Include="ViewModel\DatiStampaViewModel.cs" />
+    <Compile Include="View\DatiMarsauView.xaml.cs">
       <DependentUpon>DatiMarsauView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DatiMarsauControl\DatiMasauViewModel.cs" />
     <Compile Include="InvertedBoolToVisibilityConverter.cs" />
-    <Compile Include="ModificaControl\ModificaView.xaml.cs">
+    <Compile Include="View\DatiStampaView.xaml.cs">
+      <DependentUpon>DatiStampaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModificaView.xaml.cs">
       <DependentUpon>ModificaView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ModificaControl\ModificaViewModel.cs" />
+    <Compile Include="ViewModel\ModificaViewModel.cs" />
     <Compile Include="ServiceRepository\IProtocolliRepository.cs" />
     <Compile Include="ServiceRepository\ProtocolliService.cs" />
     <Compile Include="StampaControl\Stampa.cs" />
-    <Compile Include="StampaControl\StampaViewModel.cs" />
-    <Compile Include="StampaControl\StampaView.xaml.cs">
+    <Compile Include="ViewModel\StampaViewModel.cs" />
+    <Compile Include="View\StampaView.xaml.cs">
       <DependentUpon>StampaView.xaml</DependentUpon>
     </Compile>
-    <Page Include="DatiMarsauControl\DatiMarsauView.xaml">
+    <Page Include="View\DatiMarsauView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -105,20 +110,24 @@
     </Compile>
     <Compile Include="Common\CommonBase.cs" />
     <Compile Include="Common\RelayCommand.cs" />
-    <Compile Include="Common\ViewSelector.cs" />
+    <Compile Include="View\ViewSelector.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MarsauControl\MarsauView.xaml">
+    <Page Include="View\DatiStampaView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MenuControl\MenuView.xaml">
+    <Page Include="View\MarsauView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewModel\MenuView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ModificaControl\ModificaView.xaml">
+    <Page Include="View\ModificaView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,20 +187,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="StampaControl\StampaView.xaml">
+    <Page Include="View\StampaView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MarsauControl\MarsauView.xaml.cs">
+    <Compile Include="View\MarsauView.xaml.cs">
       <DependentUpon>MarsauView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MarsauControl\MarsauViewModel.cs" />
-    <Compile Include="MenuControl\MenuView.xaml.cs">
+    <Compile Include="ViewModel\MarsauViewModel.cs" />
+    <Compile Include="ViewModel\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MenuControl\MenuViewModel.cs" />
+    <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="Models\AdSRContext.cs" />
     <Compile Include="Models\Protocolli.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -271,6 +280,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DatiMarsauControl\" />
+    <Folder Include="MarsauControl\" />
+    <Folder Include="MenuControl\" />
+    <Folder Include="ModificaControl\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

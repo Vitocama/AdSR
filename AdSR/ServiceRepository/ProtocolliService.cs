@@ -11,9 +11,10 @@ namespace AdSR.ServiceRepository
         {
             try
             {
-                var db = new AdSRContext();
-                var protocolli = db.Protocolli.ToList();
-                return protocolli;
+                using (var db = new AdSRContext())
+                {
+                    return db.Protocolli.ToList();
+                }
             }
             catch (Exception ex)
             {
@@ -25,26 +26,46 @@ namespace AdSR.ServiceRepository
         {
             try
             {
-                var db = new AdSRContext();
-                // Protocolli non ha proprietà Id, quindi restituisce il primo record
-                return db.Protocolli.FirstOrDefault();
+                using (var db = new AdSRContext())
+                {
+                    // ATTENZIONE: Protocolli non ha un Id numerico (la chiave è MARSAU),
+                    // quindi qui viene restituito solo il primo record. Usare ProtocolliGetByMarsau.
+                    return db.Protocolli.FirstOrDefault();
+                }
             }
             catch (Exception ex)
             {
                 throw new Exception($"Errore nel recupero del protocollo: {ex.Message}", ex);
             }
         }
-        
-        public void ProtocolliInsert(Protocolli protocollo)
+
+        public Protocolli ProtocolliGetByMarsau(string marsau)
         {
             try
             {
-                if (protocollo == null)
-                    throw new ArgumentNullException(nameof(protocollo), "Il protocollo non può essere nullo");
+                using (var db = new AdSRContext())
+                {
+                    return db.Protocolli.FirstOrDefault(p => p.Marsau == marsau);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Errore nel recupero del protocollo: {ex.Message}", ex);
+            }
+        }
 
-                var db = new AdSRContext();
-                db.Protocolli.Add(protocollo);
-                db.SaveChanges();
+        public void ProtocolliInsert(Protocolli protocollo)
+        {
+            if (protocollo == null)
+                throw new ArgumentNullException(nameof(protocollo), "Il protocollo non può essere nullo");
+
+            try
+            {
+                using (var db = new AdSRContext())
+                {
+                    db.Protocolli.Add(protocollo);
+                    db.SaveChanges();
+                }
             }
             catch (Exception ex)
             {
@@ -66,26 +87,9 @@ namespace AdSR.ServiceRepository
                     if (existing == null)
                         throw new Exception($"Protocollo con Marsau '{protocollo.Marsau}' non trovato");
 
-                    existing.Ditta = protocollo.Ditta;
-                    existing.Rdo = protocollo.Rdo;
-                    existing.Atto = protocollo.Atto;
-                    existing.Contratto = protocollo.Contratto;
-                    existing.Richiesta = protocollo.Richiesta;
-                    existing.Importo = protocollo.Importo;
-                    existing.Giorni = protocollo.Giorni;
-          
-                    existing.Siga45 = protocollo.Siga45;
-                    existing.Forniture = protocollo.Forniture;
-                    existing.Note = protocollo.Note;
-                    existing.Cre = protocollo.Cre;
-                    existing.Ddt= protocollo.Ddt;
-                    existing.DataIntroduzione = protocollo.DataIntroduzione;
-                    existing.Fattura = protocollo.Fattura;
-                    existing.ImportoFattura = protocollo.ImportoFattura;
-                    existing.Bdc = protocollo.Bdc;
-                    existing.Collaudo = protocollo.Collaudo;
-                    existing.Cartella=protocollo.Cartella;
-                    existing.Argomento = protocollo.Argomento;
+                    // Copia TUTTE le colonne del modello (prima ne venivano aggiornate solo alcune
+                    // e le modifiche a Lotto, Capitolo, RUP, DEC, date, PdG, ecc. andavano perse).
+                    db.Entry(existing).CurrentValues.SetValues(protocollo);
 
                     db.SaveChanges();
                 }
@@ -98,15 +102,25 @@ namespace AdSR.ServiceRepository
 
         public void ProtocolliDelete(int id)
         {
+            // ATTENZIONE: la versione precedente cancellava il PRIMO record della tabella,
+            // qualunque fosse l'id passato. Bloccato finché non si usa ProtocolliDeleteByMarsau.
+            throw new NotSupportedException(
+                "Protocolli non ha un Id numerico: usare ProtocolliDeleteByMarsau(marsau).");
+        }
+
+        public void ProtocolliDeleteByMarsau(string marsau)
+        {
             try
             {
-                var db = new AdSRContext();
-                var protocollo = db.Protocolli.FirstOrDefault();
-                if (protocollo == null)
-                    throw new Exception("Protocollo non trovato");
+                using (var db = new AdSRContext())
+                {
+                    var protocollo = db.Protocolli.FirstOrDefault(p => p.Marsau == marsau);
+                    if (protocollo == null)
+                        throw new Exception($"Protocollo con Marsau '{marsau}' non trovato");
 
-                db.Protocolli.Remove(protocollo);
-                db.SaveChanges();
+                    db.Protocolli.Remove(protocollo);
+                    db.SaveChanges();
+                }
             }
             catch (Exception ex)
             {

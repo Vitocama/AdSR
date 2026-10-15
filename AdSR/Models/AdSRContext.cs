@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -25,9 +27,43 @@ namespace AdSR.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlite(@"Data Source=C:\Users\Hirad\source\repos\AdSR\AdSR\AdSR.db");
+                optionsBuilder.UseSqlite(LeggiConnectionString());
             }
+        }
+
+        /// <summary>
+        /// Legge il percorso del database dal file db.txt (nella cartella dell'eseguibile).
+        /// Il file puo' contenere solo il percorso:
+        ///     \\server\condivisa\AdSR.db
+        /// oppure la stringa completa:
+        ///     Data Source=\\server\condivisa\AdSR.db
+        /// Righe vuote e righe che iniziano con # vengono ignorate.
+        /// </summary>
+        private static string LeggiConnectionString()
+        {
+            string fileConfig = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "db.txt");
+
+            if (!File.Exists(fileConfig))
+                throw new FileNotFoundException(
+                    "File di configurazione del database non trovato:\n" + fileConfig +
+                    "\n\nCreare il file db.txt con il percorso del database (es. \\\\server\\cartella\\AdSR.db).",
+                    fileConfig);
+
+            string riga = File.ReadAllLines(fileConfig)
+                .Select(r => r.Trim())
+                .FirstOrDefault(r => r.Length > 0 && !r.StartsWith("#"));
+
+            if (string.IsNullOrWhiteSpace(riga))
+                throw new InvalidOperationException("Il file db.txt e' vuoto:\n" + fileConfig);
+
+            // Rimuove eventuali virgolette
+            riga = riga.Trim('"');
+
+            // Se c'e' gia' "Data Source=" la usa cosi' com'e', altrimenti la costruisce
+            if (riga.StartsWith("Data Source=", StringComparison.OrdinalIgnoreCase))
+                return riga;
+
+            return "Data Source=" + riga;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -78,6 +114,8 @@ namespace AdSR.Models
                 // ═══════════════════════════════════════════════════════
                 entity.Property(e => e.Forniture).HasColumnName("FORNITURE");
                 entity.Property(e => e.Siga45).HasColumnName("SIGA45");
+                entity.Property(e => e.FornituraParziale).HasColumnName("FORNITURA_PARZIALE");
+                entity.Property(e => e.FornituraCompleta).HasColumnName("FORNITURA_COMPLETA");
 
                 // ═══════════════════════════════════════════════════════
                 // CRE / DDT / JOSH
@@ -87,6 +125,14 @@ namespace AdSR.Models
                 entity.Property(e => e.Josh).HasColumnName("JOSH");
                 entity.Property(e => e.Ddt).HasColumnName("DDT");
                 entity.Property(e => e.DataDdt).HasColumnName("DATA_DDT");
+                entity.Property(e => e.Pervenuto).HasColumnName("DATA_PERVENUTO");
+                entity.Property(e => e.Ddt2).HasColumnName("DDT_2");
+                entity.Property(e => e.DataDdt2).HasColumnName("DATA_DDT_2");
+                entity.Property(e => e.Pervenuto2).HasColumnName("DATA_PERVENUTO_2");
+                entity.Property(e => e.Ddt3).HasColumnName("DDT_3");
+                entity.Property(e => e.DataDdt3).HasColumnName("DATA_DDT_3");
+                entity.Property(e => e.Pervenuto3).HasColumnName("DATA_PERVENUTO_3");
+                entity.Property(e => e.Trasmesso).HasColumnName("TRASMESSO");
 
                 // ═══════════════════════════════════════════════════════
                 // FATTURAZIONE
@@ -101,11 +147,19 @@ namespace AdSR.Models
                 entity.Property(e => e.Bdc).HasColumnName("BDC");
                 entity.Property(e => e.DataBdc).HasColumnName("DATA_BDC");
                 entity.Property(e => e.Collaudo).HasColumnName("COLLAUDO");
+                entity.Property(e => e.DataCollaudo).HasColumnName("DATA_COLLAUDO");
+
+                // ═══════════════════════════════════════════════════════
+                // PROTOCOLLO
+                // ═══════════════════════════════════════════════════════
+                entity.Property(e => e.Protocollo).HasColumnName("PROTOCOLLO");
+                entity.Property(e => e.DataProtocollo).HasColumnName("DATA_PROTOCOLLO");
 
                 // ═══════════════════════════════════════════════════════
                 // ALTRO
                 // ═══════════════════════════════════════════════════════
                 entity.Property(e => e.PdC).HasColumnName("PdC");
+                entity.Property(e => e.PdG).HasColumnName("PdG");
                 entity.Property(e => e.Cartella).HasColumnName("CARTELLA");
                 entity.Property(e => e.Note).HasColumnName("NOTE");
             });
