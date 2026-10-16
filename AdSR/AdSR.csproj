@@ -74,10 +74,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BoolToVisibilityConverter.cs" />
+    <Compile Include="Common\MarinaMessageBox.xaml.cs">
+      <DependentUpon>MarinaMessageBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converter\TroncaMarsauConverter.cs" />
     <Compile Include="Models\DatiStampa.cs" />
+    <Compile Include="Models\DocumentoPdf.cs" />
+    <Compile Include="OpenPDFControl\OpenPDFView.xaml.cs">
+      <DependentUpon>OpenPDFView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\DatiMarsauViewModel.cs" />
     <Compile Include="ViewModel\DatiStampaViewModel.cs" />
+    <Compile Include="MainViewModel.cs" />
+    <Compile Include="ViewModel\OpenPDFViewModel.cs" />
     <Compile Include="View\DatiMarsauView.xaml.cs">
       <DependentUpon>DatiMarsauView.xaml</DependentUpon>
     </Compile>
@@ -96,6 +105,14 @@
     <Compile Include="View\StampaView.xaml.cs">
       <DependentUpon>StampaView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Common\MarinaMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OpenPDFControl\OpenPDFView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DatiMarsauView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -122,10 +139,6 @@
     <Page Include="View\MarsauView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ViewModel\MenuView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ModificaView.xaml">
       <SubType>Designer</SubType>
@@ -197,10 +210,6 @@
       <DependentUpon>MarsauView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MarsauViewModel.cs" />
-    <Compile Include="ViewModel\MenuView.xaml.cs">
-      <DependentUpon>MenuView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="Models\AdSRContext.cs" />
     <Compile Include="Models\Protocolli.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -250,8 +259,14 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Web.WebView2">
+      <Version>1.0.4312-prerelease</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf">
       <Version>1.1.142</Version>
+    </PackageReference>
+    <PackageReference Include="MvvmLightLibs">
+      <Version>5.4.1.1</Version>
     </PackageReference>
     <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3">
       <Version>2.1.11</Version>
@@ -286,6 +301,12 @@
     <Folder Include="MarsauControl\" />
     <Folder Include="MenuControl\" />
     <Folder Include="ModificaControl\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IMG\logoPantano.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IMG\logo_pantano.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

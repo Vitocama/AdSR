@@ -1,0 +1,140 @@
+﻿<Window x:Class="AdSR.OpenPDFControl.OpenPDFView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdSR.OpenPDFControl"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance local:OpenPDFViewModel}"
+        Title="{Binding Titolo}" Height="800" Width="1400"
+        Background="#0F2044"
+        WindowStartupLocation="CenterOwner">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="Gold" Color="#C9A84C"/>
+        <SolidColorBrush x:Key="GoldLight" Color="#E8C97A"/>
+        <SolidColorBrush x:Key="NavyDark" Color="#0F2044"/>
+        <SolidColorBrush x:Key="NavyMedium" Color="#2A456E"/>
+
+        <Style TargetType="Button" x:Key="ButtonStyle">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#0F2044"/>
+            <Setter Property="Background" Value="{StaticResource Gold}"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style TargetType="ListBoxItem" x:Key="DocItemStyle">
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Bd" Background="Transparent" Padding="{TemplateBinding Padding}"
+                                BorderBrush="#22FFFFFF" BorderThickness="0,0,0,1">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#162D5C"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{StaticResource NavyMedium}"/>
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource Gold}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- HEADER -->
+        <Border Grid.Row="0" Background="{StaticResource NavyMedium}"
+                BorderBrush="{StaticResource Gold}" BorderThickness="0,0,0,2" Padding="16,10">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <Button Style="{StaticResource ButtonStyle}" Content="⟳ AGGIORNA"
+                            Command="{Binding AggiornaCommand}" Margin="0,0,8,0"/>
+                    <Button Style="{StaticResource ButtonStyle}" Content="ESPLORA RISORSE"
+                            Command="{Binding ApriEsploraCommand}" Margin="0,0,8,0"/>
+                    <Button Style="{StaticResource ButtonStyle}" Content="APRI ESTERNO"
+                            Command="{Binding ApriEsternoCommand}"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="{Binding Titolo}" FontSize="18" FontWeight="Bold"
+                               Foreground="{StaticResource Gold}"/>
+                    <TextBlock Text="{Binding Cartella}" FontSize="11" Foreground="#9FB0CC"
+                               TextTrimming="CharacterEllipsis" ToolTip="{Binding Cartella}"/>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="340" MinWidth="220"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- SINISTRA: elenco PDF -->
+            <DockPanel Grid.Column="0" Background="{StaticResource NavyDark}">
+                <TextBlock DockPanel.Dock="Top" Margin="12,10"
+                           Text="{Binding Documenti.Count, StringFormat=▸ DOCUMENTI ({0})}"
+                           FontWeight="Bold" Foreground="{StaticResource GoldLight}"/>
+
+                <Grid>
+                    <ListBox ItemsSource="{Binding Documenti}"
+                             SelectedItem="{Binding DocumentoSelezionato}"
+                             ItemContainerStyle="{StaticResource DocItemStyle}"
+                             Background="Transparent" BorderThickness="0"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel ToolTip="{Binding Percorso}">
+                                    <TextBlock Text="{Binding Nome}" Foreground="White"
+                                               FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock Foreground="#9FB0CC" FontSize="11">
+                                        <Run Text="{Binding DataModifica, StringFormat=dd/MM/yyyy HH:mm, Mode=OneWay}"/>
+                                        <Run Text="   "/>
+                                        <Run Text="{Binding Sottocartella, Mode=OneWay}" Foreground="{StaticResource Gold}"/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <!-- Messaggio se la cartella non contiene PDF -->
+                    <TextBlock Text="Nessun PDF nella cartella" Foreground="#9FB0CC"
+                               HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Documenti.Count}" Value="0">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+            </DockPanel>
+
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch"
+                          Background="{StaticResource Gold}"/>
+
+            <!-- DESTRA: lettore PDF (Chromium) -->
+            <wv2:WebView2 Grid.Column="2" Source="{Binding PdfUri}"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,12 +1,16 @@
-﻿using AdSR.Models;
+﻿using AdSR.Common;
+using AdSR.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 
 namespace AdSR.ServiceRepository
 {
     public class ProtocolliService : IProtocolliRepository
     {
+        // ═══ LETTURA ═══
+
         public List<Protocolli> ProtocolliGetAll()
         {
             try
@@ -18,7 +22,8 @@ namespace AdSR.ServiceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception($"Errore nel recupero dei protocolli: {ex.Message}", ex);
+                MostraErrore("Errore nel recupero dei protocolli", ex);
+                throw;
             }
         }
 
@@ -35,7 +40,8 @@ namespace AdSR.ServiceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception($"Errore nel recupero del protocollo: {ex.Message}", ex);
+                MostraErrore("Errore nel recupero del protocollo", ex);
+                throw;
             }
         }
 
@@ -50,14 +56,21 @@ namespace AdSR.ServiceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception($"Errore nel recupero del protocollo: {ex.Message}", ex);
+                MostraErrore($"Errore nel recupero del protocollo '{marsau}'", ex);
+                throw;
             }
         }
+
+        // ═══ SCRITTURA ═══
 
         public void ProtocolliInsert(Protocolli protocollo)
         {
             if (protocollo == null)
+            {
+                MarinaMessageBox.Show("Il protocollo da inserire non è valido.",
+                    "Attenzione", MessageBoxButton.OK, MessageBoxImage.Warning);
                 throw new ArgumentNullException(nameof(protocollo), "Il protocollo non può essere nullo");
+            }
 
             try
             {
@@ -69,14 +82,19 @@ namespace AdSR.ServiceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception($"Errore nell'inserimento del protocollo: {ex.Message}", ex);
+                MostraErrore("Errore nell'inserimento del protocollo", ex);
+                throw;
             }
         }
 
         public void ProtocolliUpdate(Protocolli protocollo)
         {
             if (protocollo == null)
+            {
+               MarinaMessageBox.Show("Il protocollo da aggiornare non è valido.",
+                    "Attenzione", MessageBoxButton.OK, MessageBoxImage.Warning);
                 throw new ArgumentNullException(nameof(protocollo), "Il protocollo non può essere nullo");
+            }
 
             try
             {
@@ -85,10 +103,9 @@ namespace AdSR.ServiceRepository
                     var existing = db.Protocolli.FirstOrDefault(p => p.Marsau == protocollo.Marsau);
 
                     if (existing == null)
-                        throw new Exception($"Protocollo con Marsau '{protocollo.Marsau}' non trovato");
+                        throw new InvalidOperationException($"Protocollo con Marsau '{protocollo.Marsau}' non trovato");
 
-                    // Copia TUTTE le colonne del modello (prima ne venivano aggiornate solo alcune
-                    // e le modifiche a Lotto, Capitolo, RUP, DEC, date, PdG, ecc. andavano perse).
+                    // Copia TUTTE le colonne del modello
                     db.Entry(existing).CurrentValues.SetValues(protocollo);
 
                     db.SaveChanges();
@@ -96,36 +113,57 @@ namespace AdSR.ServiceRepository
             }
             catch (Exception ex)
             {
-                throw new Exception($"Errore nell'aggiornamento del protocollo: {ex.Message}", ex);
+                MostraErrore("Errore nell'aggiornamento del protocollo", ex);
+                throw;
             }
         }
 
         public void ProtocolliDelete(int id)
         {
-            // ATTENZIONE: la versione precedente cancellava il PRIMO record della tabella,
-            // qualunque fosse l'id passato. Bloccato finché non si usa ProtocolliDeleteByMarsau.
-            throw new NotSupportedException(
-                "Protocolli non ha un Id numerico: usare ProtocolliDeleteByMarsau(marsau).");
+            // Protocolli non ha un Id numerico: bloccato, usare ProtocolliDeleteByMarsau
+            const string msg = "Protocolli non ha un Id numerico: usare ProtocolliDeleteByMarsau(marsau).";
+            MarinaMessageBox.Show(msg, "Operazione non supportata",
+                MessageBoxButton.OK, MessageBoxImage.Warning);
+            throw new NotSupportedException(msg);
         }
 
         public void ProtocolliDeleteByMarsau(string marsau)
         {
+            var risposta = MarinaMessageBox.Show(
+                $"Eliminare definitivamente il protocollo '{marsau}'?\n\nL'operazione non è reversibile.",
+                "Conferma eliminazione", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (risposta != MessageBoxResult.Yes)
+                return;
+
             try
             {
                 using (var db = new AdSRContext())
                 {
                     var protocollo = db.Protocolli.FirstOrDefault(p => p.Marsau == marsau);
                     if (protocollo == null)
-                        throw new Exception($"Protocollo con Marsau '{marsau}' non trovato");
+                        throw new InvalidOperationException($"Protocollo con Marsau '{marsau}' non trovato");
 
                     db.Protocolli.Remove(protocollo);
                     db.SaveChanges();
                 }
+
+                MarinaMessageBox.Show($"Protocollo '{marsau}' eliminato.",
+                    "AdSR", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                throw new Exception($"Errore nell'eliminazione del protocollo: {ex.Message}", ex);
+                MostraErrore("Errore nell'eliminazione del protocollo", ex);
+                throw;
             }
+        }
+
+        // ═══ SUPPORTO ═══
+
+        private static void MostraErrore(string operazione, Exception ex)
+        {
+           MarinaMessageBox.Show($"{operazione}:\n\n{ex.GetBaseException().Message}",
+                "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

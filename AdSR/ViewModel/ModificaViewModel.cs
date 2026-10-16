@@ -84,7 +84,7 @@ namespace AdSR.ModificaControl
                 CopiaValori(MarsauSelezionato, _originale);
                 _protocolliRepository.ProtocolliUpdate(_originale);
 
-                MessageBox.Show("Modifiche salvate correttamente.", "Successo",
+                MarinaMessageBox.Show("Modifiche salvate correttamente.", "Successo",
                     MessageBoxButton.OK, MessageBoxImage.Information);
 
                 _window?.Close();
@@ -95,7 +95,7 @@ namespace AdSR.ModificaControl
                 if (ex.InnerException != null)
                     messaggio += "\n\nDettaglio: " + ex.InnerException.Message;
 
-                MessageBox.Show(messaggio, "Errore",
+                MarinaMessageBox.Show(messaggio, "Errore",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

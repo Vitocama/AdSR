@@ -99,7 +99,7 @@ namespace AdSR.StampaControl
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Errore durante la stampa: " + ex.Message,
+                MarinaMessageBox.Show("Errore durante la stampa: " + ex.Message,
                     "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

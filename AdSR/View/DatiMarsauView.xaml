@@ -12,194 +12,47 @@
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-        <SolidColorBrush x:Key="Gold" Color="#C9A84C"/>
-        <SolidColorBrush x:Key="GoldLight" Color="#E8C97A"/>
-        <SolidColorBrush x:Key="NavyDark" Color="#0F2044"/>
-        <SolidColorBrush x:Key="NavyMedium" Color="#2A456E"/>
+     
 
         <common:TroncaMarsauConverter x:Key="TroncaMarsauConverter"/>
 
-        <Style TargetType="TextBlock" x:Key="LabelStyle">
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Foreground" Value="{StaticResource Gold}"/>
-            <Setter Property="Margin" Value="0,15,0,5"/>
-        </Style>
+      
 
-        <Style x:Key="ComboBoxItemStyle" TargetType="ComboBoxItem">
-            <Setter Property="Foreground" Value="#FFFFFF"/>
-            <Setter Property="Background" Value="#0F2044"/>
-            <Setter Property="Padding" Value="10,8"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ComboBoxItem">
-                        <Border x:Name="Bd"
-                                Background="{TemplateBinding Background}"
-                                Padding="{TemplateBinding Padding}"
-                                BorderThickness="0">
-                            <ContentPresenter VerticalAlignment="Center"
-                                              HorizontalAlignment="Left"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Bd" Property="Background" Value="#162D5C"/>
-                                <Setter Property="Foreground" Value="#E8C97A"/>
-                            </Trigger>
-                            <Trigger Property="IsHighlighted" Value="True">
-                                <Setter TargetName="Bd" Property="Background" Value="#C9A84C"/>
-                                <Setter Property="Foreground" Value="#0A1628"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+     
+     
 
-        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
-            <Setter Property="Foreground" Value="#FFFFFF"/>
-            <Setter Property="Background" Value="#162840"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Gold}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="10,6"/>
-            <Setter Property="MinHeight" Value="38"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="ItemContainerStyle" Value="{StaticResource ComboBoxItemStyle}"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ComboBox">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="30"/>
-                            </Grid.ColumnDefinitions>
+        <!-- Campi semi-trasparenti: la foto traspare leggermente -->
+      
 
-                            <Border x:Name="MainBorder"
-                                    Grid.ColumnSpan="2"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="3"/>
-
-                            <ToggleButton x:Name="ToggleButton"
-                                          Grid.ColumnSpan="2"
-                                          Background="Transparent"
-                                          BorderThickness="0"
-                                          Focusable="False"
-                                          ClickMode="Press"
-                                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
-                                <ToggleButton.Template>
-                                    <ControlTemplate TargetType="ToggleButton">
-                                        <Border Background="Transparent"/>
-                                    </ControlTemplate>
-                                </ToggleButton.Template>
-                            </ToggleButton>
-
-                            <ContentPresenter x:Name="ContentSite"
-                                              Grid.Column="0"
-                                              Content="{TemplateBinding SelectionBoxItem}"
-                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                              Margin="{TemplateBinding Padding}"
-                                              VerticalAlignment="Center"
-                                              HorizontalAlignment="Left"
-                                              IsHitTestVisible="False"/>
-
-                            <Path x:Name="Arrow"
-                                  Grid.Column="1"
-                                  HorizontalAlignment="Center"
-                                  VerticalAlignment="Center"
-                                  Data="M 0 0 L 8 0 L 4 5 Z"
-                                  Fill="{StaticResource Gold}"
-                                  IsHitTestVisible="False"/>
-
-                            <Popup x:Name="Popup"
-                                   Grid.ColumnSpan="2"
-                                   Placement="Bottom"
-                                   IsOpen="{TemplateBinding IsDropDownOpen}"
-                                   AllowsTransparency="True"
-                                   Focusable="False"
-                                   PopupAnimation="Slide">
-                                <Grid x:Name="DropDown"
-                                      SnapsToDevicePixels="True"
-                                      MinWidth="{TemplateBinding ActualWidth}"
-                                      MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                                    <Border x:Name="DropDownBorder"
-                                            Background="#0F2044"
-                                            BorderBrush="{StaticResource Gold}"
-                                            BorderThickness="1"
-                                            CornerRadius="0,0,3,3"/>
-                                    <ScrollViewer Margin="1" SnapsToDevicePixels="True">
-                                        <StackPanel IsItemsHost="True"
-                                                    KeyboardNavigation.DirectionalNavigation="Contained"/>
-                                    </ScrollViewer>
-                                </Grid>
-                            </Popup>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="MainBorder" Property="BorderBrush" Value="{StaticResource GoldLight}"/>
-                                <Setter TargetName="Arrow" Property="Fill" Value="{StaticResource GoldLight}"/>
-                            </Trigger>
-                            <Trigger Property="IsDropDownOpen" Value="True">
-                                <Setter TargetName="MainBorder" Property="BorderBrush" Value="{StaticResource GoldLight}"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Foreground" Value="#66FFFFFF"/>
-                                <Setter Property="Opacity" Value="0.6"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style TargetType="TextBlock" x:Key="SectionHeaderStyle">
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="13"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="{StaticResource GoldLight}"/>
-            <Setter Property="Margin" Value="0,20,0,8"/>
-        </Style>
-
-        <Style TargetType="TextBox" x:Key="InputStyle">
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Foreground" Value="#FFFFFF"/>
-            <Setter Property="Background" Value="#162840"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Gold}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="8,6"/>
-            <Setter Property="Margin" Value="0,0,0,10"/>
-        </Style>
-
-        <Style TargetType="Button" x:Key="ButtonStyle">
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="#0F2044"/>
-            <Setter Property="Background" Value="{StaticResource Gold}"/>
-            <Setter Property="Padding" Value="20,8"/>
-            <Setter Property="Margin" Value="5,0"/>
-            <Setter Property="Cursor" Value="Hand"/>
-        </Style>
+       
     </Window.Resources>
 
-    <Grid Background="{StaticResource NavyDark}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!-- SFONDO: foto Marina (Images/marina.jpg, Azione di compilazione = Resource) -->
+        <Grid.Background>
+            <ImageBrush ImageSource="/IMG/logo_pantano.png"
+                        Stretch="UniformToFill"
+                        AlignmentX="Center" AlignmentY="Center"/>
+        </Grid.Background>
+
+        <!-- VELO navy sopra la foto: garantisce la leggibilità dei campi -->
+        <Border Grid.RowSpan="2">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#E60F2044" Offset="0"/>
+                    <GradientStop Color="#B30F2044" Offset="0.4"/>
+                    <GradientStop Color="#F20F2044" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
         <!-- HEADER -->
-        <Border Grid.Row="0" Background="{StaticResource NavyMedium}"
+        <Border Grid.Row="0" Background="#D92A456E"
                 BorderBrush="{StaticResource Gold}" BorderThickness="0,0,0,2" Padding="16,12">
             <TextBlock FontSize="18" FontWeight="Bold" Foreground="{StaticResource Gold}">
                 <Run Text="Dettagli Marsau - "/>
@@ -676,12 +529,41 @@
                     </StackPanel>
                 </Grid>
 
-                <!-- Cartella (mancava) -->
+                <!-- Cartella + Sfoglia -->
                 <StackPanel Margin="0,0,0,10">
                     <TextBlock Text="Cartella:" Style="{StaticResource LabelStyle}"/>
-                    <TextBox Text="{Binding MarsauSelezionato.Cartella, Mode=OneWay}"
-                             Style="{StaticResource InputStyle}"
-                             IsReadOnly="True"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Grid.Column="0"
+                                 Text="{Binding MarsauSelezionato.Cartella, Mode=OneWay}"
+                                 Style="{StaticResource InputStyle}"
+                                 IsReadOnly="True"/>
+
+                        <Button Grid.Column="1"
+                                Style="{StaticResource ButtonStyle}"
+                                Command="{Binding SfogliaCommand}"
+                                ToolTip="Sfoglia i documenti PDF della cartella"
+                                Margin="10,0,0,10"
+                                Padding="20,8">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="M3,2 L10,2 L13,5 L13,15 L3,15 Z
+                                            M10,2 L10,5 L13,5
+                                            M5,8 L11,8 M5,10.5 L11,10.5 M5,13 L9,13"
+                                      Stroke="#0F2044"
+                                      StrokeThickness="1.4"
+                                      StrokeLineJoin="Round"
+                                      Fill="Transparent"
+                                      Width="16" Height="16"
+                                      Stretch="Uniform"
+                                      Margin="0,0,8,0"/>
+                                <TextBlock Text="SFOGLIA" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
                 </StackPanel>
 
                 <!-- Note -->
@@ -723,55 +605,55 @@
 
                     <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Style="{StaticResource ButtonStyle}"
-                            Command="{Binding OpenCartellaCommand}"
-                            Padding="20,8"
-                            Margin="0,0,10,0">
+                                Command="{Binding OpenCartellaCommand}"
+                                Padding="20,8"
+                                Margin="0,0,10,0">
                             <StackPanel Orientation="Horizontal">
                                 <Path Data="M2,5 L7,5 L9,7 L14,7 L14,13 L2,13 Z"
-                                  Stroke="#0F2044"
-                                  StrokeThickness="1.6"
-                                  StrokeLineJoin="Round"
-                                  Fill="Transparent"
-                                  Width="16" Height="16"
-                                  Stretch="Uniform"
-                                  Margin="0,0,8,0"/>
+                                      Stroke="#0F2044"
+                                      StrokeThickness="1.6"
+                                      StrokeLineJoin="Round"
+                                      Fill="Transparent"
+                                      Width="16" Height="16"
+                                      Stretch="Uniform"
+                                      Margin="0,0,8,0"/>
                                 <TextBlock Text="APRI CARTELLA" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
 
                         <Button Style="{StaticResource ButtonStyle}"
-                            Command="{Binding OpenModificaCommand}"
-                            Padding="20,8"
-                            Margin="0,0,10,0">
+                                Command="{Binding OpenModificaCommand}"
+                                Padding="20,8"
+                                Margin="0,0,10,0">
                             <StackPanel Orientation="Horizontal">
                                 <Path Data="M12,2 L16,6 L7,15 L2,16 L3,11 Z
-                                        M10,4 L14,8
-                                        M3,11 L7,15"
-                                  Stroke="#0F2044"
-                                  StrokeThickness="1.6"
-                                  StrokeLineJoin="Round"
-                                  Fill="Transparent"
-                                  Width="16" Height="16"
-                                  Stretch="Uniform"
-                                  Margin="0,0,8,0"/>
+                                            M10,4 L14,8
+                                            M3,11 L7,15"
+                                      Stroke="#0F2044"
+                                      StrokeThickness="1.6"
+                                      StrokeLineJoin="Round"
+                                      Fill="Transparent"
+                                      Width="16" Height="16"
+                                      Stretch="Uniform"
+                                      Margin="0,0,8,0"/>
                                 <TextBlock Text="MODIFICA DATI" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
 
                         <Button Style="{StaticResource ButtonStyle}"
-                            Command="{Binding StampaCommand}"
-                            Padding="20,8">
+                                Command="{Binding StampaCommand}"
+                                Padding="20,8">
                             <StackPanel Orientation="Horizontal">
                                 <Path Data="M4,2 L12,2 L12,6 L4,6 Z
-                                        M2,6 L14,6 L14,11 L2,11 Z
-                                        M4,11 L12,11 L12,15 L4,15 Z"
-                                  Stroke="#0F2044"
-                                  StrokeThickness="1.6"
-                                  StrokeLineJoin="Round"
-                                  Fill="Transparent"
-                                  Width="16" Height="16"
-                                  Stretch="Uniform"
-                                  Margin="0,0,8,0"/>
+                                            M2,6 L14,6 L14,11 L2,11 Z
+                                            M4,11 L12,11 L12,15 L4,15 Z"
+                                      Stroke="#0F2044"
+                                      StrokeThickness="1.6"
+                                      StrokeLineJoin="Round"
+                                      Fill="Transparent"
+                                      Width="16" Height="16"
+                                      Stretch="Uniform"
+                                      Margin="0,0,8,0"/>
                                 <TextBlock Text="STAMPA" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>

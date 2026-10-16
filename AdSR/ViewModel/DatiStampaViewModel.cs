@@ -122,7 +122,7 @@ namespace AdSR.StampaControl
 
                 if (!int.TryParse(NumeroColli.Trim(), out colli) || colli < 0)
                 {
-                    MessageBox.Show("Inserisci un numero di colli valido (0 o più).",
+                    MarinaMessageBox.Show("Inserisci un numero di colli valido (0 o più).",
                         "Dati stampa", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }

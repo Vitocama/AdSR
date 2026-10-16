@@ -1,11 +1,13 @@
 ﻿using AdSR.Common;
 using AdSR.Models;
 using AdSR.ModificaControl;
+using AdSR.OpenPDFControl;
 using AdSR.ServiceRepository;
 using AdSR.StampaControl;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -120,29 +122,33 @@ namespace AdSR.DatiMarsau
 
             if (string.IsNullOrWhiteSpace(cartella))
             {
-                MessageBox.Show("Nessun percorso cartella associato a questo protocollo.",
+                MarinaMessageBox.Show("Nessun percorso cartella associato a questo protocollo.",
                     "Attenzione", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             if (!Directory.Exists(cartella))
             {
-                MessageBox.Show($"La cartella non esiste o non è raggiungibile:\n{cartella}",
+                MarinaMessageBox.Show($"La cartella non esiste o non è raggiungibile:\n{cartella}",
                     "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             try
             {
-                Process.Start(new ProcessStartInfo
+                var titolo = new TroncaMarsauConverter()
+                    .Convert(MarsauSelezionato.Marsau, typeof(string), null,
+                             CultureInfo.CurrentCulture)?.ToString();
+
+                var view = new OpenPDFView(cartella, $"Documenti Marsau - {titolo}")
                 {
-                    FileName = cartella,
-                    UseShellExecute = true
-                });
+                    Owner = _window
+                };
+                view.ShowDialog();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Impossibile aprire la cartella:\n{ex.Message}",
+                MarinaMessageBox.Show($"Impossibile aprire il visualizzatore documenti:\n{ex.Message}",
                     "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

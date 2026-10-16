@@ -21,4 +21,16 @@
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
+
+    <Style TargetType="TextBlock" x:Key="SectionHeaderStyle">
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{StaticResource GoldLight}"/>
+        <Setter Property="Margin" Value="0,20,0,8"/>
+    </Style>
+
+
+
+
 </ResourceDictionary>

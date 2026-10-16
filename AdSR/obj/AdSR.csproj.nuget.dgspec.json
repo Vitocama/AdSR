@@ -58,9 +58,17 @@
               "target": "Package",
               "version": "[3.1.32, )"
             },
+            "Microsoft.Web.WebView2": {
+              "target": "Package",
+              "version": "[1.0.4312-prerelease, )"
+            },
             "Microsoft.Xaml.Behaviors.Wpf": {
               "target": "Package",
               "version": "[1.1.142, )"
+            },
+            "MvvmLightLibs": {
+              "target": "Package",
+              "version": "[5.4.1.1, )"
             },
             "SQLitePCLRaw.lib.e_sqlite3": {
               "target": "Package",

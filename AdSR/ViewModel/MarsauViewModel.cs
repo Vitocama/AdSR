@@ -86,7 +86,7 @@ namespace AdSR.MarsauControl
         {
             if (MarsauSelezionato == null)
             {
-                MessageBox.Show("Nessun Marsau selezionato!");
+                MarinaMessageBox.Show("Nessun Marsau selezionato!");
                 return;
             }
 
@@ -155,7 +155,7 @@ namespace AdSR.MarsauControl
                 string.IsNullOrWhiteSpace(NuovoMarsau.Rdo) &&
                 string.IsNullOrWhiteSpace(NuovoMarsau.Atto))
             {
-                MessageBox.Show("Inserisci almeno Marsau, RDO o Atto!", "Avviso",
+                MarinaMessageBox.Show("Inserisci almeno Marsau, RDO o Atto!", "Avviso",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
@@ -222,7 +222,7 @@ namespace AdSR.MarsauControl
                 IsFormVisible = false;
                 NuovoMarsau = new Protocolli();
 
-                MessageBox.Show("Marsau salvato con successo!", "Successo",
+                MarinaMessageBox.Show("Marsau salvato con successo!", "Successo",
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
@@ -231,7 +231,7 @@ namespace AdSR.MarsauControl
                 if (ex.InnerException != null)
                     messaggio += "\n\nDettaglio: " + ex.InnerException.Message;
 
-                MessageBox.Show(messaggio, "Errore",
+                MarinaMessageBox.Show(messaggio, "Errore",
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

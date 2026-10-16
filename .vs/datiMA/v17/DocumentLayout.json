@@ -3,52 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\Hirad\\source\\repos\\AdSR\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|c:\\users\\hirad\\source\\repos\\adsr\\adsr\\stampacontrol\\stampa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\stampacontrol\\stampa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|c:\\users\\hirad\\source\\repos\\adsr\\adsr\\resourcesdictionary\\resources\\colordictionary.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\resourcesdictionary\\resources\\colordictionary.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|c:\\users\\hirad\\source\\repos\\adsr\\adsr\\models\\datistampa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\models\\datistampa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|c:\\users\\hirad\\source\\repos\\adsr\\adsr\\resourcesdictionary\\resources\\textboxdictionary.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\resourcesdictionary\\resources\\textboxdictionary.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|C:\\Users\\Hirad\\source\\repos\\AdSR\\adsr\\viewmodel\\datistampaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\viewmodel\\datistampaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|c:\\users\\hirad\\source\\repos\\adsr\\adsr\\resourcesdictionary\\resources\\buttondictionary.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\resourcesdictionary\\resources\\buttondictionary.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|c:\\users\\hirad\\source\\repos\\adsr\\adsr\\models\\protocolli.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\models\\protocolli.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|C:\\Users\\Hirad\\source\\repos\\AdSR\\adsr\\models\\adsrcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\models\\adsrcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|C:\\Users\\Hirad\\source\\repos\\AdSR\\adsr\\view\\datistampaview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\view\\datistampaview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|C:\\Users\\Hirad\\source\\repos\\AdSR\\adsr\\viewmodel\\stampaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\viewmodel\\stampaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|C:\\Users\\Hirad\\source\\repos\\AdSR\\adsr\\viewmodel\\datimarsauviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\viewmodel\\datimarsauviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|C:\\Users\\Hirad\\source\\repos\\AdSR\\adsr\\view\\stampaview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\view\\stampaview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|C:\\Users\\Hirad\\source\\repos\\AdSR\\adsr\\view\\stampaview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\view\\stampaview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|C:\\Users\\Hirad\\source\\repos\\AdSR\\adsr\\view\\datistampaview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\view\\datistampaview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|C:\\Users\\Hirad\\source\\repos\\AdSR\\adsr\\view\\datimarsauview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|c:\\users\\hirad\\source\\repos\\adsr\\adsr\\view\\datimarsauview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\view\\datimarsauview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|c:\\users\\hirad\\source\\repos\\adsr\\adsr\\resourcesdictionary\\resources\\textblockdictionary.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\resourcesdictionary\\resources\\textblockdictionary.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|c:\\users\\hirad\\source\\repos\\adsr\\adsr\\resourcesdictionary\\resources\\comboboxdictionary.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\resourcesdictionary\\resources\\comboboxdictionary.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|c:\\users\\hirad\\source\\repos\\adsr\\adsr\\resourcesdictionary\\resources\\labeldictionary.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\resourcesdictionary\\resources\\labeldictionary.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|c:\\users\\hirad\\source\\repos\\adsr\\adsr\\common\\marinamessagebox.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{14BA0A8D-F67D-43EE-A5E8-05F58DE7A28A}|AdSR\\AdSR.csproj|solutionrelative:adsr\\common\\marinamessagebox.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 268,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -70,148 +54,99 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "StampaViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\ViewModel\\StampaViewModel.cs",
-              "RelativeDocumentMoniker": "AdSR\\ViewModel\\StampaViewModel.cs",
-              "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\ViewModel\\StampaViewModel.cs",
-              "RelativeToolTip": "AdSR\\ViewModel\\StampaViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGwAAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-13T09:01:19.933Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "DatiMarsauViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\ViewModel\\DatiMarsauViewModel.cs",
-              "RelativeDocumentMoniker": "AdSR\\ViewModel\\DatiMarsauViewModel.cs",
-              "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\ViewModel\\DatiMarsauViewModel.cs",
-              "RelativeToolTip": "AdSR\\ViewModel\\DatiMarsauViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAK4AAAA9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-13T08:54:53.184Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Stampa.cs",
-              "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\StampaControl\\Stampa.cs",
-              "RelativeDocumentMoniker": "AdSR\\StampaControl\\Stampa.cs",
-              "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\StampaControl\\Stampa.cs",
-              "RelativeToolTip": "AdSR\\StampaControl\\Stampa.cs",
-              "ViewState": "AgIAAFoAAAAAAAAAAAAAwG0AAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-13T08:55:30.91Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DatiStampaViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\ViewModel\\DatiStampaViewModel.cs",
-              "RelativeDocumentMoniker": "AdSR\\ViewModel\\DatiStampaViewModel.cs",
-              "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\ViewModel\\DatiStampaViewModel.cs",
-              "RelativeToolTip": "AdSR\\ViewModel\\DatiStampaViewModel.cs",
-              "ViewState": "AgIAAFQAAAAAAAAAAAAiwE8AAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-13T07:32:51.093Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "DatiStampa.cs",
-              "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\Models\\DatiStampa.cs",
-              "RelativeDocumentMoniker": "AdSR\\Models\\DatiStampa.cs",
-              "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\Models\\DatiStampa.cs",
-              "RelativeToolTip": "AdSR\\Models\\DatiStampa.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBQAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-15T05:30:59.617Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Protocolli.cs",
-              "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\Models\\Protocolli.cs",
-              "RelativeDocumentMoniker": "AdSR\\Models\\Protocolli.cs",
-              "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\Models\\Protocolli.cs",
-              "RelativeToolTip": "AdSR\\Models\\Protocolli.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-15T05:31:14.426Z",
+              "Title": "TextBoxDictionary.xaml",
+              "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\ResourcesDictionary\\Resources\\TextBoxDictionary.xaml",
+              "RelativeDocumentMoniker": "AdSR\\ResourcesDictionary\\Resources\\TextBoxDictionary.xaml",
+              "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\ResourcesDictionary\\Resources\\TextBoxDictionary.xaml",
+              "RelativeToolTip": "AdSR\\ResourcesDictionary\\Resources\\TextBoxDictionary.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-10-16T10:33:37.747Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "AdSRContext.cs",
-              "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\Models\\AdSRContext.cs",
-              "RelativeDocumentMoniker": "AdSR\\Models\\AdSRContext.cs",
-              "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\Models\\AdSRContext.cs",
-              "RelativeToolTip": "AdSR\\Models\\AdSRContext.cs",
-              "ViewState": "AgIAADMAAAAAAAAAAAAuwDsAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-13T11:52:41.477Z"
+              "Title": "TextBlockDictionary.xaml",
+              "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\ResourcesDictionary\\Resources\\TextBlockDictionary.xaml",
+              "RelativeDocumentMoniker": "AdSR\\ResourcesDictionary\\Resources\\TextBlockDictionary.xaml",
+              "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\ResourcesDictionary\\Resources\\TextBlockDictionary.xaml",
+              "RelativeToolTip": "AdSR\\ResourcesDictionary\\Resources\\TextBlockDictionary.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-10-16T10:33:06.288Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "DatiStampaView.xaml",
-              "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\View\\DatiStampaView.xaml",
-              "RelativeDocumentMoniker": "AdSR\\View\\DatiStampaView.xaml",
-              "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\View\\DatiStampaView.xaml",
-              "RelativeToolTip": "AdSR\\View\\DatiStampaView.xaml",
+              "Title": "ComboBoxDictionary.xaml",
+              "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\ResourcesDictionary\\Resources\\ComboBoxDictionary.xaml",
+              "RelativeDocumentMoniker": "AdSR\\ResourcesDictionary\\Resources\\ComboBoxDictionary.xaml",
+              "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\ResourcesDictionary\\Resources\\ComboBoxDictionary.xaml",
+              "RelativeToolTip": "AdSR\\ResourcesDictionary\\Resources\\ComboBoxDictionary.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-10-13T08:54:41.081Z"
+              "WhenOpened": "2026-10-16T10:32:22.899Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "StampaView.xaml",
-              "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\View\\StampaView.xaml",
-              "RelativeDocumentMoniker": "AdSR\\View\\StampaView.xaml",
-              "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\View\\StampaView.xaml",
-              "RelativeToolTip": "AdSR\\View\\StampaView.xaml",
+              "DocumentIndex": 6,
+              "Title": "LabelDictionary.xaml",
+              "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\ResourcesDictionary\\Resources\\LabelDictionary.xaml",
+              "RelativeDocumentMoniker": "AdSR\\ResourcesDictionary\\Resources\\LabelDictionary.xaml",
+              "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\ResourcesDictionary\\Resources\\LabelDictionary.xaml",
+              "RelativeToolTip": "AdSR\\ResourcesDictionary\\Resources\\LabelDictionary.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-10-13T09:00:36.459Z"
+              "WhenOpened": "2026-10-16T10:31:39.876Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "StampaView.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\View\\StampaView.xaml.cs",
-              "RelativeDocumentMoniker": "AdSR\\View\\StampaView.xaml.cs",
-              "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\View\\StampaView.xaml.cs",
-              "RelativeToolTip": "AdSR\\View\\StampaView.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-13T09:00:39.198Z"
+              "DocumentIndex": 0,
+              "Title": "ColorDictionary.xaml",
+              "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\ResourcesDictionary\\Resources\\ColorDictionary.xaml",
+              "RelativeDocumentMoniker": "AdSR\\ResourcesDictionary\\Resources\\ColorDictionary.xaml",
+              "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\ResourcesDictionary\\Resources\\ColorDictionary.xaml",
+              "RelativeToolTip": "AdSR\\ResourcesDictionary\\Resources\\ColorDictionary.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-10-16T10:30:58.676Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "DatiStampaView.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\View\\DatiStampaView.xaml.cs",
-              "RelativeDocumentMoniker": "AdSR\\View\\DatiStampaView.xaml.cs",
-              "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\View\\DatiStampaView.xaml.cs",
-              "RelativeToolTip": "AdSR\\View\\DatiStampaView.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-13T09:00:17.189Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 3,
               "Title": "DatiMarsauView.xaml",
               "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\View\\DatiMarsauView.xaml",
               "RelativeDocumentMoniker": "AdSR\\View\\DatiMarsauView.xaml",
               "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\View\\DatiMarsauView.xaml",
               "RelativeToolTip": "AdSR\\View\\DatiMarsauView.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-10-13T09:00:14.696Z"
+              "WhenOpened": "2026-10-16T10:30:40.19Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ButtonDictionary.xaml",
+              "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\ResourcesDictionary\\Resources\\ButtonDictionary.xaml",
+              "RelativeDocumentMoniker": "AdSR\\ResourcesDictionary\\Resources\\ButtonDictionary.xaml",
+              "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\ResourcesDictionary\\Resources\\ButtonDictionary.xaml",
+              "RelativeToolTip": "AdSR\\ResourcesDictionary\\Resources\\ButtonDictionary.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-10-16T10:28:50.106Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MarinaMessageBox.xaml",
+              "DocumentMoniker": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\Common\\MarinaMessageBox.xaml",
+              "RelativeDocumentMoniker": "AdSR\\Common\\MarinaMessageBox.xaml",
+              "ToolTip": "C:\\Users\\Hirad\\source\\repos\\AdSR\\AdSR\\Common\\MarinaMessageBox.xaml",
+              "RelativeToolTip": "AdSR\\Common\\MarinaMessageBox.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-10-16T10:28:33.934Z",
+              "EditorCaption": ""
             }
           ]
         },

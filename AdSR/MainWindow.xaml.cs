@@ -24,20 +24,8 @@ namespace AdSR
         public MainWindow()
         {
             InitializeComponent();
+            DataContext= new MainViewModel();
         }
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            base.OnClosing(e);
-
-            var risultato = MessageBox.Show(
-                "Sei sicuro di voler chiudere l'applicazione?",
-                "Conferma chiusura",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Question
-            );
-
-            if (risultato == MessageBoxResult.No)
-                e.Cancel = true;
-        }
+       
     }
 }
