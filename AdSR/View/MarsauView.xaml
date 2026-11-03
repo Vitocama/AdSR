@@ -10,6 +10,7 @@
         Background="#0F2044"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip">
+   
 
     <Window.Resources>
         <common:TroncaMarsauConverter x:Key="TroncaMarsauConverter"/>
@@ -336,6 +337,7 @@
     </Window.Resources>
 
     <Grid Background="{StaticResource NavyDark}">
+       
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -849,12 +851,7 @@
                                          Text="{Binding CartellaPath}"
                                          Style="{StaticResource FormTextBoxStyle}"
                                          IsReadOnly="True"/>
-                                <Button Grid.Column="2"
-                                        Content="📁 Sfoglia..."
-                                        Command="{Binding SfogliaCartellaCommand}"
-                                        Style="{StaticResource PrimaryButtonStyle}"
-                                        MinWidth="120"
-                                        Padding="12,6"/>
+                              
                             </Grid>
                         </StackPanel>
 

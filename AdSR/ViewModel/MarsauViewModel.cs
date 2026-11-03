@@ -27,7 +27,7 @@ namespace AdSR.MarsauControl
         public ICommand SalvaCommand { get; }
         public ICommand AnnullaCommand { get; }
         public ICommand apriDatiMarsau { get; }
-        public ICommand SfogliaCartellaCommand { get; }
+      
 
         public string CartellaPath
         {
@@ -49,7 +49,6 @@ namespace AdSR.MarsauControl
             MarsauFiltratiLista = new ObservableCollection<Protocolli>(MarsauLista);
             NuovoMarsau = new Protocolli();
 
-            SfogliaCartellaCommand = new RelayCommand(SfogliaCartella);
             SearchCommand = new RelayCommand(Filter);
             AggiungiCommand = new RelayCommand(Aggiungi);
             SalvaCommand = new RelayCommand(Salva);
@@ -57,30 +56,7 @@ namespace AdSR.MarsauControl
             apriDatiMarsau = new RelayCommand(ApriDatiMarsau);
         }
 
-        private void SfogliaCartella()
-        {
-            var dialog = new Microsoft.Win32.SaveFileDialog
-            {
-                Title = "Seleziona la cartella dei documenti del Marsau",
-                FileName = "Seleziona cartella",
-                Filter = "Cartella|*.this.directory",
-                CheckFileExists = false,
-                CheckPathExists = true
-            };
-
-            if (!string.IsNullOrWhiteSpace(NuovoMarsau.Cartella) &&
-                System.IO.Directory.Exists(NuovoMarsau.Cartella))
-            {
-                dialog.InitialDirectory = NuovoMarsau.Cartella;
-            }
-
-            if (dialog.ShowDialog() == true)
-            {
-                string percorsoCartella = System.IO.Path.GetDirectoryName(dialog.FileName);
-                NuovoMarsau.Cartella = percorsoCartella;
-                RaisePropertyChanged(nameof(CartellaPath));
-            }
-        }
+        
 
         private void ApriDatiMarsau()
         {

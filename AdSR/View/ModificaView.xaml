@@ -35,33 +35,11 @@
             <Setter Property="Margin" Value="0,20,0,8"/>
         </Style>
 
-        <Style TargetType="TextBox" x:Key="InputStyle">
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Foreground" Value="#FFFFFF"/>
-            <Setter Property="Background" Value="#162840"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Gold}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="8,6"/>
-            <Setter Property="Margin" Value="0,0,0,10"/>
-            <Setter Property="CaretBrush" Value="{StaticResource Gold}"/>
-        </Style>
 
-        <Style TargetType="Button" x:Key="ButtonStyle">
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="#0F2044"/>
-            <Setter Property="Background" Value="{StaticResource Gold}"/>
-            <Setter Property="Padding" Value="20,8"/>
-            <Setter Property="Margin" Value="5,0"/>
-            <Setter Property="Cursor" Value="Hand"/>
-        </Style>
 
-        <Style TargetType="Button" x:Key="CancelButtonStyle" BasedOn="{StaticResource ButtonStyle}">
-            <Setter Property="Background" Value="#666666"/>
-            <Setter Property="Foreground" Value="#FFFFFF"/>
-        </Style>
+       
+
+      
     </Window.Resources>
 
     <Grid Background="{StaticResource NavyDark}">
@@ -506,11 +484,30 @@
                                  Style="{StaticResource InputStyle}"/>
                     </StackPanel>
                 </Grid>
-
                 <StackPanel Margin="0,0,0,10">
                     <TextBlock Text="Cartella:" Style="{StaticResource LabelStyle}"/>
-                    <TextBox Text="{Binding MarsauSelezionato.Cartella, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Style="{StaticResource InputStyle}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox x:Name="txtCartella"
+                 Grid.Column="0"
+                 Text="{Binding MarsauSelezionato.Cartella, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Style="{StaticResource InputStyle}"
+                 VerticalAlignment="Center"/>
+
+                        <Button Grid.Column="1"
+                Style="{StaticResource ButtonStyle}"
+                Content="SFOGLIA..."
+                Height="{Binding ActualHeight, ElementName=txtCartella}"
+                MinWidth="100"
+                Margin="10,0,0,10"
+                Padding="20,0"
+                VerticalAlignment="Center"
+                Command="{Binding SfogliaCartellaCommand}"/>
+                    </Grid>
                 </StackPanel>
 
                 <!-- Note -->

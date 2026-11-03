@@ -1,0 +1,271 @@
+﻿<Window x:Class="AdSR.Common.MarinaMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        SizeToContent="Height"
+        Width="500"
+        WindowStartupLocation="CenterOwner"
+        PreviewKeyDown="Window_PreviewKeyDown">
+
+    <Window.Resources>
+        <!-- ===== PALETTE ===== -->
+      
+
+        <!-- ===== STILE IMPLICITO PULSANTI =====
+             Si applica ai Button creati dal code-behind in PannelloPulsanti
+             (a meno che il code-behind non assegni esplicitamente uno Style). -->
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="{StaticResource MbText}"/>
+            <Setter Property="Background" Value="#14FFFFFF"/>
+            <Setter Property="BorderBrush" Value="#99C9A44C"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="MinWidth" Value="100"/>
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="Padding" Value="18,0"/>
+            <Setter Property="Margin" Value="10,0,0,0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <!-- anello di focus -->
+                            <Border x:Name="FocusRing"
+                                    Margin="-3"
+                                    CornerRadius="8"
+                                    BorderBrush="{StaticResource MbGoldLight}"
+                                    BorderThickness="1"
+                                    Opacity="0"/>
+                            <Border x:Name="Bd"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="5"
+                                    Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  RecognizesAccessKey="True"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <!-- Pulsante predefinito: pieno oro -->
+                            <Trigger Property="IsDefault" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{StaticResource MbGoldFill}"/>
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource MbGoldLight}"/>
+                                <Setter Property="Foreground" Value="#0A1630"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource MbGoldLight}"/>
+                                <Setter TargetName="Bd" Property="Opacity" Value="0.92"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                    <Condition Property="IsDefault" Value="False"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd" Property="Background" Value="#2EC9A44C"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Bd" Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                                <Setter TargetName="Bd" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="FocusRing" Property="Opacity" Value="0.9"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.45"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ScrollBar sottile per il messaggio -->
+        <Style TargetType="ScrollBar">
+            <Setter Property="Width" Value="6"/>
+            <Setter Property="MinWidth" Value="6"/>
+            <Setter Property="Opacity" Value="0.6"/>
+        </Style>
+    </Window.Resources>
+
+    <!-- Margine esterno: spazio per l'ombra -->
+    <Border Margin="20"
+            Background="{StaticResource MbCardBg}"
+            BorderBrush="{StaticResource MbCardBorder}"
+            BorderThickness="1"
+            CornerRadius="10">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="30" ShadowDepth="6" Direction="270" Opacity="0.65" Color="Black"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- 0 banda colore tipo -->
+                <RowDefinition Height="Auto"/>
+                <!-- 1 header -->
+                <RowDefinition Height="Auto"/>
+                <!-- 2 filo oro -->
+                <RowDefinition Height="Auto"/>
+                <!-- 3 corpo -->
+                <RowDefinition Height="Auto"/>
+                <!-- 4 pulsanti -->
+            </Grid.RowDefinitions>
+
+            <!-- FILIGRANA PANTANO: in basso a destra, discreta -->
+            <Image Grid.Row="3" Grid.RowSpan="2"
+                   Source="/IMG/NavePa.jpeg"
+                   Height="150"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,-10,-10"
+                   Opacity="0.07"
+                   Stretch="Uniform"
+                   IsHitTestVisible="False"
+                   RenderOptions.BitmapScalingMode="HighQuality"/>
+
+            <!-- BANDA SUPERIORE: prende il colore dell'icona (info/avviso/errore/domanda) -->
+            <Border Grid.Row="0"
+                    Height="4"
+                    CornerRadius="9,9,0,0"
+                    Background="{Binding Background, ElementName=IconaBox}"/>
+
+            <!-- HEADER: stemma a sinistra, intestazione + titolo -->
+            <Border Grid.Row="1"
+                    Background="#1FFFFFFF"
+                    Padding="18,12,18,12"
+                    Cursor="SizeAll">
+                <DockPanel LastChildFill="True">
+                    <Border DockPanel.Dock="Left"
+                            Width="42" Height="42"
+                            CornerRadius="21"
+                            Background="#260A1630"
+                            BorderBrush="{StaticResource MbGold}"
+                            BorderThickness="1"
+                            Margin="0,0,14,0"
+                            VerticalAlignment="Center">
+                        <Image Source="/IMG/stemma.png"
+                               Margin="5"
+                               RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </Border>
+
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="MARINA MILITARE · MARINARSEN"
+                                   FontFamily="Segoe UI"
+                                   FontSize="10"
+                                   FontWeight="SemiBold"
+                                   Foreground="{StaticResource MbTextDim}"
+                                   Margin="0,0,0,2"/>
+                        <TextBlock x:Name="TxtTitolo"
+                                   FontFamily="Segoe UI Semibold"
+                                   FontSize="15"
+                                   Foreground="{StaticResource MbGoldLight}"
+                                   TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <!-- Filo oro sfumato -->
+            <Rectangle Grid.Row="2"
+                       Height="1"
+                       Fill="{StaticResource MbGoldRule}"/>
+
+            <!-- CORPO: icona + messaggio -->
+            <Grid Grid.Row="3" Margin="24,24,24,22">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0"
+                      Width="60" Height="60"
+                      VerticalAlignment="Top"
+                      Margin="0,0,20,0">
+                    <!-- anello esterno nel colore del tipo messaggio -->
+                    <Ellipse Stroke="{Binding Background, ElementName=IconaBox}"
+                             StrokeThickness="2"
+                             Opacity="0.35"/>
+
+                    <Border x:Name="IconaBox"
+                            Width="46" Height="46"
+                            CornerRadius="23"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                        <Border.Effect>
+                            <DropShadowEffect x:Name="IconaGlow"
+                                              BlurRadius="20"
+                                              ShadowDepth="0"
+                                              Opacity="0.75"/>
+                        </Border.Effect>
+                        <TextBlock x:Name="IconaGlifo"
+                                   FontFamily="Segoe UI"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Border>
+                </Grid>
+
+                <ScrollViewer Grid.Column="1"
+                              MaxHeight="300"
+                              VerticalAlignment="Center"
+                              VerticalScrollBarVisibility="Auto">
+                    <TextBlock x:Name="TxtMessaggio"
+                               FontFamily="Segoe UI"
+                               FontSize="14"
+                               Foreground="{StaticResource MbText}"
+                               TextWrapping="Wrap"
+                               LineHeight="21"/>
+                </ScrollViewer>
+            </Grid>
+
+            <!-- RIGA IN FONDO: dati a sinistra, pulsanti a destra (nessuna fascia) -->
+            <Grid Grid.Row="4" Margin="24,0,24,22">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- SINISTRA: due dati (es. Marsau). Si riempiono dal code-behind;
+                     se vuoti restano nascosti. -->
+                <StackPanel Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Margin="0,0,16,0">
+                    <TextBlock x:Name="TxtDato1"
+                               FontFamily="Segoe UI"
+                               FontSize="11"
+                               FontWeight="SemiBold"
+                               Foreground="{StaticResource MbGoldLight}"
+                               TextTrimming="CharacterEllipsis"
+                               Visibility="Collapsed"/>
+                    <TextBlock x:Name="TxtDato2"
+                               FontFamily="Segoe UI"
+                               FontSize="11"
+                               Foreground="{StaticResource MbTextDim}"
+                               TextTrimming="CharacterEllipsis"
+                               Margin="0,2,0,0"
+                               Visibility="Collapsed"/>
+                </StackPanel>
+
+                <!-- DESTRA: pulsanti -->
+                <StackPanel x:Name="PannelloPulsanti"
+                            Grid.Column="1"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"/>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

@@ -74,13 +74,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BoolToVisibilityConverter.cs" />
-    <Compile Include="Common\MarinaMessageBox.xaml.cs">
+    <Compile Include="View\MarinaMessageBox.xaml.cs">
       <DependentUpon>MarinaMessageBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converter\TroncaMarsauConverter.cs" />
     <Compile Include="Models\DatiStampa.cs" />
     <Compile Include="Models\DocumentoPdf.cs" />
-    <Compile Include="OpenPDFControl\OpenPDFView.xaml.cs">
+    <Compile Include="View\OpenPDFView.xaml.cs">
       <DependentUpon>OpenPDFView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\DatiMarsauViewModel.cs" />
@@ -105,11 +105,11 @@
     <Compile Include="View\StampaView.xaml.cs">
       <DependentUpon>StampaView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Common\MarinaMessageBox.xaml">
+    <Page Include="View\MarinaMessageBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OpenPDFControl\OpenPDFView.xaml">
+    <Page Include="View\OpenPDFView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -127,7 +127,7 @@
     </Compile>
     <Compile Include="Common\CommonBase.cs" />
     <Compile Include="Common\RelayCommand.cs" />
-    <Compile Include="View\ViewSelector.cs" />
+    <Compile Include="Common\ViewSelector.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -301,12 +301,16 @@
     <Folder Include="MarsauControl\" />
     <Folder Include="MenuControl\" />
     <Folder Include="ModificaControl\" />
+    <Folder Include="OpenPDFControl\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="IMG\logoPantano.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="IMG\logo_pantano.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="IMG\NavePa.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

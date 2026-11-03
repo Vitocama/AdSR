@@ -1,6 +1,7 @@
 ﻿using AdSR.Common;
 using AdSR.Models;
 using AdSR.ServiceRepository;
+using Microsoft.Win32;
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -18,6 +19,47 @@ namespace AdSR.ModificaControl
 
         // Copia di lavoro su cui agiscono i binding della view
         private Protocolli _marsauSelezionato;
+
+        private RelayCommand _sfogliaCartellaCommand;
+        public ICommand SfogliaCartellaCommand
+        {
+            get
+            {
+                if (_sfogliaCartellaCommand == null)
+                    _sfogliaCartellaCommand = new RelayCommand(SfogliaCartella, CanSfogliaCartella);
+                return _sfogliaCartellaCommand;
+            }
+        }
+
+        private bool CanSfogliaCartella()
+        {
+            return MarsauSelezionato != null;
+        }
+
+        private void SfogliaCartella()
+        {
+            var dialog = new OpenFileDialog
+            {
+                Title = "Seleziona la cartella",
+                CheckFileExists = false,
+                CheckPathExists = true,
+                FileName = "Seleziona cartella",
+                Filter = "Cartelle|*.none",
+                ValidateNames = false
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                var path = System.IO.Path.GetDirectoryName(dialog.FileName);
+                if (!string.IsNullOrEmpty(path))
+                {
+                    MarsauSelezionato.Cartella = path;
+
+                    // Notifica la UI che il path è cambiato
+                    OnPropertyChanged(nameof(MarsauSelezionato));
+                }
+            }
+        }
 
         public Protocolli MarsauSelezionato
         {

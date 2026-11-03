@@ -7,7 +7,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <!-- COLORI: sempre per primo -->
                 <ResourceDictionary Source="/ResourcesDictionary/Resources/ColorDictionary.xaml"/>
-
                 <ResourceDictionary Source="/ResourcesDictionary/Resources/ButtonDictionary.xaml"/>
                 <ResourceDictionary Source="/ResourcesDictionary/Resources/LabelDictionary.xaml"/>
                 <ResourceDictionary Source="/ResourcesDictionary/Resources/BorderDictionary.xaml"/>

@@ -278,4 +278,38 @@
         </Setter>
     </Style>
 
+    <Color x:Key="CGold">#C9A44C</Color>
+    <Color x:Key="CGoldLight">#E9CF8A</Color>
+    <Color x:Key="CNavyDeep">#0A1630</Color>
+
+    <SolidColorBrush x:Key="MbGold"      Color="{StaticResource CGold}"/>
+    <SolidColorBrush x:Key="MbGoldLight" Color="{StaticResource CGoldLight}"/>
+    <SolidColorBrush x:Key="MbText"      Color="#E8EEF5"/>
+    <SolidColorBrush x:Key="MbTextDim"   Color="#8FA3BF"/>
+
+    <LinearGradientBrush x:Key="MbCardBg" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#16305E" Offset="0"/>
+        <GradientStop Color="#0F2044" Offset="0.45"/>
+        <GradientStop Color="#0A1630" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="MbCardBorder" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#B3C9A44C" Offset="0"/>
+        <GradientStop Color="#33C9A44C" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!-- Filo oro sfumato ai lati -->
+    <LinearGradientBrush x:Key="MbGoldRule" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="#00C9A44C" Offset="0"/>
+        <GradientStop Color="#FFC9A44C" Offset="0.2"/>
+        <GradientStop Color="#FFE9CF8A" Offset="0.5"/>
+        <GradientStop Color="#FFC9A44C" Offset="0.8"/>
+        <GradientStop Color="#00C9A44C" Offset="1"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="MbGoldFill" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#F0D58F" Offset="0"/>
+        <GradientStop Color="#C9A44C" Offset="1"/>
+    </LinearGradientBrush>
+
 </ResourceDictionary>

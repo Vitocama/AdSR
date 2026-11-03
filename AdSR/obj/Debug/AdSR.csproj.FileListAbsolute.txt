@@ -93,9 +93,9 @@ C:\Users\Hirad\source\repos\AdSR\AdSR\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
 C:\Users\Hirad\source\repos\AdSR\AdSR\bin\Debug\GalaSoft.MvvmLight.dll
 C:\Users\Hirad\source\repos\AdSR\AdSR\bin\Debug\GalaSoft.MvvmLight.pdb
 C:\Users\Hirad\source\repos\AdSR\AdSR\bin\Debug\System.Windows.Interactivity.dll
-C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\OpenPDFControl\OpenPDFView.g.cs
-C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\OpenPDFControl\OpenPDFView.baml
 C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\MainWindow.g.cs
 C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\MainWindow.baml
-C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\Common\MarinaMessageBox.baml
-C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\Common\MarinaMessageBox.g.cs
+C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\View\MarinaMessageBox.baml
+C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\View\MarinaMessageBox.g.cs
+C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\View\OpenPDFView.g.cs
+C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\View\OpenPDFView.baml
