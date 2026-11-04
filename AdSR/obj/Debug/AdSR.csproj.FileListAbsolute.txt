@@ -99,3 +99,7 @@ C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\View\MarinaMessageBox.baml
 C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\View\MarinaMessageBox.g.cs
 C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\View\OpenPDFView.g.cs
 C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\View\OpenPDFView.baml
+C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\ResourcesDictionary\Resources\DatePicker.baml
+C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\ResourcesDictionary\Resources\RadioButton.baml
+C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\ResourcesDictionary\Resources\ScrollViewDictionary.baml
+C:\Users\Hirad\source\repos\AdSR\AdSR\obj\Debug\ResourcesDictionary\Resources\ScrollBarDictionary.baml

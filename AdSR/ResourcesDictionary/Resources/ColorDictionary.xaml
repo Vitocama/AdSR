@@ -312,4 +312,10 @@
         <GradientStop Color="#C9A44C" Offset="1"/>
     </LinearGradientBrush>
 
+    
+    <SolidColorBrush x:Key="RowDark" Color="#162840"/>
+    <SolidColorBrush x:Key="RowMedium" Color="#1A3A52"/>
+
+    
+   
 </ResourceDictionary>

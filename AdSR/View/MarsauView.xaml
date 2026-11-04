@@ -10,357 +10,89 @@
         Background="#0F2044"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip">
-   
+
 
     <Window.Resources>
-        <common:TroncaMarsauConverter x:Key="TroncaMarsauConverter"/>
-        <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-        <local:InvertedBoolToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter"/>
+        <ResourceDictionary>
 
-        <SolidColorBrush x:Key="Gold" Color="#C9A84C"/>
-        <SolidColorBrush x:Key="GoldLight" Color="#E8C97A"/>
-        <SolidColorBrush x:Key="NavyDark" Color="#0F2044"/>
-        <SolidColorBrush x:Key="NavyMedium" Color="#2A456E"/>
-        <SolidColorBrush x:Key="RowDark" Color="#162840"/>
-        <SolidColorBrush x:Key="RowMedium" Color="#1A3A52"/>
+            <common:TroncaMarsauConverter x:Key="TroncaMarsauConverter"/>
+            <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <local:InvertedBoolToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter"/>
 
-        <Style x:Key="FormDatePickerStyle" TargetType="DatePicker">
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="Background" Value="{StaticResource RowDark}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Gold}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="8,6"/>
-            <Setter Property="Height" Value="36"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-        </Style>
-
-        <!-- =========== STILI TESTO =========== -->
-        <Style x:Key="WindowTitleStyle" TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="{StaticResource Gold}"/>
-            <Setter Property="Margin" Value="16,12"/>
-        </Style>
-
-        <Style x:Key="SearchLabelStyle" TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="13"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Foreground" Value="{StaticResource Gold}"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="0,0,8,0"/>
-        </Style>
-
-        <Style x:Key="FormLabelStyle" TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="13"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Foreground" Value="{StaticResource Gold}"/>
-            <Setter Property="Margin" Value="0,0,0,5"/>
-        </Style>
-
-        <!-- =========== STILI CAMPI =========== -->
-        <Style x:Key="SearchTextBoxStyle" TargetType="TextBox">
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="13"/>
-            <Setter Property="Foreground" Value="#FFFFFF"/>
-            <Setter Property="Background" Value="{StaticResource RowDark}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Gold}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="8,6"/>
-            <Setter Property="Height" Value="34"/>
-            <Setter Property="Width" Value="280"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-        </Style>
-
-        <Style x:Key="FormTextBoxStyle" TargetType="TextBox">
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Foreground" Value="#FFFFFF"/>
-            <Setter Property="Background" Value="{StaticResource RowDark}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Gold}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="8,6"/>
-            <Setter Property="Height" Value="36"/>
-        </Style>
-
-        <Style x:Key="FormMultilineTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource FormTextBoxStyle}">
-            <Setter Property="Height" Value="100"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="AcceptsReturn" Value="True"/>
-            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
-        </Style>
-
-        <!-- ============================================================
-             COMBOBOX STYLE - Tema Navy/Oro
-             ============================================================ -->
-
-        <!-- Stile per i singoli ComboBoxItem -->
-        <Style x:Key="ComboBoxItemStyle" TargetType="ComboBoxItem">
-            <Setter Property="Foreground" Value="#FFFFFF"/>
-            <Setter Property="Background" Value="{StaticResource NavyDark}"/>
-            <Setter Property="Padding" Value="10,8"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ComboBoxItem">
-                        <Border x:Name="Bd"
-                                Background="{TemplateBinding Background}"
-                                Padding="{TemplateBinding Padding}"
-                                BorderThickness="0">
-                            <ContentPresenter VerticalAlignment="Center"
-                                              HorizontalAlignment="Left"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Bd" Property="Background" Value="#162D5C"/>
-                                <Setter Property="Foreground" Value="{StaticResource GoldLight}"/>
-                            </Trigger>
-                            <Trigger Property="IsHighlighted" Value="True">
-                                <Setter TargetName="Bd" Property="Background" Value="{StaticResource Gold}"/>
-                                <Setter Property="Foreground" Value="{StaticResource NavyDark}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- Stile principale del ComboBox (coerente con FormTextBoxStyle) -->
-        <Style x:Key="FormComboBoxStyle" TargetType="ComboBox">
-            <Setter Property="Foreground" Value="#FFFFFF"/>
-            <Setter Property="Background" Value="{StaticResource RowDark}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Gold}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="8,6"/>
-            <Setter Property="Height" Value="36"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="ItemContainerStyle" Value="{StaticResource ComboBoxItemStyle}"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ComboBox">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="30"/>
-                            </Grid.ColumnDefinitions>
-
-                            <!-- Bordo principale -->
-                            <Border x:Name="MainBorder"
-                                    Grid.ColumnSpan="2"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="3"/>
-
-                            <!-- ToggleButton trasparente che apre il popup -->
-                            <ToggleButton x:Name="ToggleButton"
-                                          Grid.ColumnSpan="2"
-                                          Background="Transparent"
-                                          BorderThickness="0"
-                                          Focusable="False"
-                                          ClickMode="Press"
-                                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
-                                <ToggleButton.Template>
-                                    <ControlTemplate TargetType="ToggleButton">
-                                        <Border Background="Transparent"/>
-                                    </ControlTemplate>
-                                </ToggleButton.Template>
-                            </ToggleButton>
-
-                            <!-- Testo dell'elemento selezionato -->
-                            <ContentPresenter x:Name="ContentSite"
-                                              Grid.Column="0"
-                                              Content="{TemplateBinding SelectionBoxItem}"
-                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                              Margin="{TemplateBinding Padding}"
-                                              VerticalAlignment="Center"
-                                              HorizontalAlignment="Left"
-                                              IsHitTestVisible="False"/>
-
-                            <!-- Freccia -->
-                            <Path x:Name="Arrow"
-                                  Grid.Column="1"
-                                  HorizontalAlignment="Center"
-                                  VerticalAlignment="Center"
-                                  Data="M 0 0 L 8 0 L 4 5 Z"
-                                  Fill="{StaticResource Gold}"
-                                  IsHitTestVisible="False"/>
-
-                            <!-- Popup con la lista -->
-                            <Popup x:Name="Popup"
-                                   Grid.ColumnSpan="2"
-                                   Placement="Bottom"
-                                   IsOpen="{TemplateBinding IsDropDownOpen}"
-                                   AllowsTransparency="True"
-                                   Focusable="False"
-                                   PopupAnimation="Slide">
-                                <Grid x:Name="DropDown"
-                                      SnapsToDevicePixels="True"
-                                      MinWidth="{TemplateBinding ActualWidth}"
-                                      MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                                    <Border x:Name="DropDownBorder"
-                                            Background="{StaticResource NavyDark}"
-                                            BorderBrush="{StaticResource Gold}"
-                                            BorderThickness="1"
-                                            CornerRadius="0,0,3,3"/>
-                                    <ScrollViewer Margin="1" SnapsToDevicePixels="True">
-                                        <StackPanel IsItemsHost="True"
-                                                    KeyboardNavigation.DirectionalNavigation="Contained"/>
-                                    </ScrollViewer>
-                                </Grid>
-                            </Popup>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="MainBorder" Property="BorderBrush" Value="{StaticResource GoldLight}"/>
-                                <Setter TargetName="Arrow" Property="Fill" Value="{StaticResource GoldLight}"/>
-                            </Trigger>
-                            <Trigger Property="IsDropDownOpen" Value="True">
-                                <Setter TargetName="MainBorder" Property="BorderBrush" Value="{StaticResource GoldLight}"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Foreground" Value="#66FFFFFF"/>
-                                <Setter Property="Opacity" Value="0.6"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- =========== STILI PULSANTI =========== -->
-        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Foreground" Value="{StaticResource NavyDark}"/>
-            <Setter Property="Background" Value="{StaticResource Gold}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource GoldLight}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="18,8"/>
-            <Setter Property="Height" Value="34"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="3"
-                                Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource GoldLight}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="CancelButtonStyle" TargetType="Button" BasedOn="{StaticResource PrimaryButtonStyle}">
-            <Setter Property="Background" Value="#666666"/>
-            <Setter Property="Foreground" Value="#FFFFFF"/>
-            <Setter Property="BorderBrush" Value="#888888"/>
-        </Style>
-
-        <!-- =========== STILI DATAGRID =========== -->
-        <Style TargetType="DataGrid">
-            <Setter Property="Background" Value="{StaticResource RowMedium}"/>
-            <Setter Property="Foreground" Value="#FFFFFF"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Gold}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="RowBackground" Value="{StaticResource RowMedium}"/>
-            <Setter Property="AlternatingRowBackground" Value="{StaticResource RowDark}"/>
-            <Setter Property="HeadersVisibility" Value="Column"/>
-            <Setter Property="GridLinesVisibility" Value="All"/>
-            <Setter Property="VerticalGridLinesBrush" Value="Yellow"/>
-            <Setter Property="HorizontalGridLinesBrush" Value="Yellow"/>
-        </Style>
-
-        <Style TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="{StaticResource NavyMedium}"/>
-            <Setter Property="Foreground" Value="{StaticResource Gold}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Gold}"/>
-            <Setter Property="BorderThickness" Value="0,0,1,2"/>
-            <Setter Property="Padding" Value="10,8"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="Height" Value="40"/>
-        </Style>
-
-        <Style TargetType="DataGridCell">
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="10,0"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-            <Style.Triggers>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="#30C9A84C"/>
-                    <Setter Property="Foreground" Value="#FFFFFF"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style TargetType="DataGridRow">
-            <Setter Property="Height" Value="48"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#20C9A84C"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <!-- Cella speciale per il campo MARSAU (evidenziato) -->
-        <Style x:Key="MarsauCellStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Foreground" Value="{StaticResource GoldLight}"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="10"/>
-        </Style>
+        </ResourceDictionary>
     </Window.Resources>
 
-    <Grid Background="{StaticResource NavyDark}">
-       
+    <Grid>
+
+        <!-- SFONDO: IMG/sfondo.png (Azione di compilazione = Resource) -->
+        <Grid.Background>
+            <ImageBrush ImageSource="/IMG/NavePa.jpeg"
+                        Stretch="UniformToFill"
+                        AlignmentX="Center" AlignmentY="Center"/>
+        </Grid.Background>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!-- VELO navy sopra la foto: garantisce la leggibilità -->
+        <Border Grid.RowSpan="3" IsHitTestVisible="False">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#E60F2044" Offset="0"/>
+                    <GradientStop Color="#B30F2044" Offset="0.4"/>
+                    <GradientStop Color="#F20F2044" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
         <!-- HEADER -->
-        <Border Grid.Row="0" Background="{StaticResource NavyMedium}"
+        <Border Grid.Row="0" Background="#F3F3F3"
                 BorderBrush="{StaticResource Gold}" BorderThickness="0,0,0,2">
             <Grid>
-                <TextBlock Text="Gestione Marsau" Style="{StaticResource WindowTitleStyle}"/>
-                <TextBlock Text="{Binding MarsauFiltratiLista.Count, StringFormat='{}{0} record'}"
-                           Foreground="{StaticResource GoldLight}"
-                           FontSize="16"
-                           FontStyle="Italic"
-                           VerticalAlignment="Center"
-                           HorizontalAlignment="Right"
-                           Margin="0,0,20,0"/>
+                <!-- SINISTRA: stemma + titolo -->
+                <Grid>
+                    <!-- SINISTRA -->
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+                HorizontalAlignment="Left" Margin="16,0,0,0">
+                        <Image Source="/IMG/stemma.png" Height="44" Margin="0,8,14,8"
+               RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <TextBlock Text="Gestione Marsau" Style="{StaticResource  BlackBoldText}" FontSize="25"
+                   Margin="0" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- DESTRA: (resta com'è) -->
+
+                    <!-- CENTRO -->
+                    <Border HorizontalAlignment="Center" VerticalAlignment="Center"
+            Margin="0,6" Padding="10,4"
+
+            BorderBrush="{StaticResource Gold}" BorderThickness="0">
+                        <Image Source="/IMG/ministero-difesa-logo.png" Height="40"
+               RenderOptions.BitmapScalingMode="HighQuality"/>
+                    </Border>
+                </Grid>
+
+                <!-- DESTRA: numero record + logo -->
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,20,0">
+                    <TextBlock Text="{Binding MarsauFiltratiLista.Count, StringFormat='{}{0} record'}"
+                               Style="{StaticResource  DettaglioSezioneStyle}"
+                               FontSize="20"
+                              
+                               VerticalAlignment="Center"
+                               Margin="0,0,18,0"/>
+                    
+                </StackPanel>
             </Grid>
         </Border>
 
         <!-- TOOLBAR RICERCA -->
-        <Border Grid.Row="1" Background="{StaticResource NavyMedium}"
+        <Border Grid.Row="1" Background="#D92A456E"
                 BorderBrush="{StaticResource Gold}" BorderThickness="0,0,0,1"
                 Padding="16,12">
             <StackPanel Orientation="Horizontal">
@@ -372,60 +104,736 @@
                         <KeyBinding Key="Enter" Command="{Binding SearchCommand}"/>
                     </TextBox.InputBindings>
                 </TextBox>
-                <Button Content="Cerca"
+
+                <Button Style="{StaticResource PrimaryButtonStyle}"
+            Command="{Binding HomeCommand}"
+            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+            ToolTip="Torna alla finestra principale"
+            Padding="16,6"
+            VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <Path Data="M2,8 L8,2 L14,8 M4,7 L4,14 L7,14 L7,10 L9,10 L9,14 L12,14 L12,7"
+                  Stroke="#0F2044"
+                  StrokeThickness="1.6"
+                  StrokeLineJoin="Round"
+                  Fill="Transparent"
+                  Width="16" Height="16"
+                  Stretch="Uniform"
+                  Margin="10,0,10,0"/>
+                        <TextBlock Text="HOME" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </Button>
+                <Button Content="CERCA"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Margin="10,0,10,0"
+                        Command="{Binding SearchCommand}"/>
+                <Button Content="AGGIUNGI MARSAU"
                         Style="{StaticResource PrimaryButtonStyle}"
                         Margin="0,0,10,0"
-                        Command="{Binding SearchCommand}"/>
-                <Button Content="+ Aggiungi Marsau"
-                        Style="{StaticResource PrimaryButtonStyle}"
                         Command="{Binding AggiungiCommand}"/>
+                <!-- Mostra/nascondi l'elenco a sinistra (nessun code-behind) -->
+                <ToggleButton x:Name="BtnElenco"
+                              Content="☰ Elenco"
+                              IsChecked="True"
+                              Style="{StaticResource ToggleElencoStyle}"/>
+                
+                <!-- DESTRA: numero record + HOME -->
+<StackPanel Orientation="Horizontal"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Right"
+            Margin="0,0,20,0">
+   
+
+</StackPanel>
             </StackPanel>
         </Border>
 
         <!-- CONTENUTO: DataGrid oppure Form -->
         <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-            <!-- ========== DATAGRID ========== -->
-            <DataGrid x:Name="DataGridMarsau"
-                      ItemsSource="{Binding MarsauFiltratiLista}"
-                      SelectedItem="{Binding MarsauSelezionato}"
-                      AutoGenerateColumns="False"
-                      CanUserAddRows="False"
-                      CanUserDeleteRows="False"
-                      CanUserResizeRows="False"
-                      IsReadOnly="True"
-                      ColumnWidth="500"
-                      Visibility="{Binding IsFormVisible, Converter={StaticResource InvertedBoolToVisibilityConverter}}"
-                      Margin="12"
-                      RowHeight="48"
-                      FontSize="20">
+            <!-- ========== ELENCO A SINISTRA: Ditta / Marsau / Data Marsau ========== -->
+            <Border x:Name="PannelloElenco"
+                    Grid.Column="0"
+                    Width="320"
+                    Margin="12,12,0,12">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=BtnElenco}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
 
-                <DataGrid.InputBindings>
-                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding apriDatiMarsau}"/>
-                </DataGrid.InputBindings>
+                <ListBox x:Name="ElencoDitte"
+                         ItemsSource="{Binding MarsauFiltratiLista}"
+                         SelectedItem="{Binding MarsauSelezionato, Mode=TwoWay}"
+                         SelectionMode="Single"
+                         Background="Transparent"
+                         BorderThickness="0"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ItemContainerStyle="{StaticResource DittaButtonItemStyle}">
 
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="DITTA" Binding="{Binding Ditta}" />
+                    <ListBox.InputBindings>
+                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding apriDatiMarsau}"/>
+                    </ListBox.InputBindings>
 
-                    <!-- MARSAU evidenziato -->
-                    <DataGridTextColumn Header="MARSAU"
-                                        Binding="{Binding Marsau, Converter={StaticResource TroncaMarsauConverter}}">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock" BasedOn="{StaticResource MarsauCellStyle}"/>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Ditta}"
+                                       TextTrimming="CharacterEllipsis"
+                                       ToolTip="{Binding Ditta}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
 
-                    <DataGridTextColumn Header="DATA MARSAU" Binding="{Binding MarsauData}" />
-                </DataGrid.Columns>
-            </DataGrid>
+            <!-- Nessun record selezionato e form chiuso: logo + messaggio -->
+            <StackPanel Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        IsHitTestVisible="False">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding MarsauSelezionato}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsFormVisible}" Value="True">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+
+              
+                <TextBlock Text="Seleziona un record dall'elenco per vedere i dettagli&#x0A;oppure premi «+ Aggiungi Marsau»"
+                           Foreground="{StaticResource GoldLight}"
+                           Opacity="0.6"
+                           FontSize="16"
+                           FontStyle="Italic"
+                           TextAlignment="Center"/>
+            </StackPanel>
+
+            <!-- ========== DETTAGLI MARSAU A DESTRA (sola lettura) ========== -->
+            <ScrollViewer x:Name="PannelloDettagli"
+                          Grid.Column="1"
+                          Margin="12"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+                <ScrollViewer.Style>
+                    <Style TargetType="ScrollViewer">
+                        <Setter Property="Visibility" Value="Visible"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding MarsauSelezionato}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsFormVisible}" Value="True">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ScrollViewer.Style>
+
+                <StackPanel HorizontalAlignment="Stretch" MaxWidth="1000" Margin="16,0,16,20">
+
+                    <!-- Titolo dettagli -->
+                    <Border Background="{StaticResource NavyMedium}"
+                            BorderBrush="{StaticResource Gold}"
+                            BorderThickness="0,0,0,2"
+                            Padding="20,14"
+                            Margin="0,0,0,16">
+                        <TextBlock FontSize="18" FontWeight="Bold"
+                                   Foreground="{StaticResource Gold}"
+                                   HorizontalAlignment="Center">
+                            <Run Text="DETTAGLI MARSAU - "/>
+                            <Run Text="{Binding MarsauSelezionato.Marsau, Converter={StaticResource TroncaMarsauConverter}, Mode=OneWay}"/>
+                        </TextBlock>
+                    </Border>
+
+                    <!-- ══════════ DATI IDENTIFICATIVI ══════════ -->
+                    <TextBlock Text="▸ DATI IDENTIFICATIVI" Style="{StaticResource DettaglioSezioneStyle}"/>
+
+                    <!-- Riga: Marsau, Data Marsau -->
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Marsau:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Marsau, Converter={StaticResource TroncaMarsauConverter}, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Data Marsau:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.MarsauData, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Riga: Ditta, RDO -->
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Ditta:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Ditta, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="RDO:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Rdo, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- ══════════ ARGOMENTO (multilinea) ══════════ -->
+                    <StackPanel Margin="0,0,0,15">
+                        <TextBlock Text="Argomento:" Style="{StaticResource FormLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Argomento, Mode=OneWay}"
+                                 Style="{StaticResource FormTextBoxStyle}"
+                                 IsReadOnly="True"
+                                 Height="120"
+                                 TextWrapping="Wrap"
+                                 AcceptsReturn="True"
+                                 VerticalScrollBarVisibility="Auto"
+                                 VerticalContentAlignment="Top"/>
+                    </StackPanel>
+
+                    <!-- Riga: Atto, Contratto -->
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Atto:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Atto, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Contratto:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Contratto, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- ══════════ RICHIESTA E IMPORTI ══════════ -->
+                    <TextBlock Text="▸ RICHIESTA E IMPORTI" Style="{StaticResource DettaglioSezioneStyle}"/>
+
+                    <!-- Riga: Richiesta, Lotto, Capitolo -->
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Richiesta:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Richiesta, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Lotto:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Lotto, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="4">
+                            <TextBlock Text="Capitolo:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Capitolo, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Riga: Importo, Giorni, RIC -->
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Importo:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Importo, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Giorni:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Giorni, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="4">
+                            <TextBlock Text="RIC:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Ric, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Riga: DEC, RUP, A.A, A.D -->
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="DEC:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Dec, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="RUP:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Rup, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="4">
+                            <TextBlock Text="A.A:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.AA, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="6">
+                            <TextBlock Text="A.D:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Ad, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- ══════════ FORNITURE E SISTEMA ══════════ -->
+                    <TextBlock Text="▸ FORNITURE E SISTEMA" Style="{StaticResource DettaglioSezioneStyle}"/>
+
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock Text="Forniture:" Style="{StaticResource FormLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Forniture, Mode=OneWay}"
+                                 Style="{StaticResource FormTextBoxStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock Text="Siga45:" Style="{StaticResource FormLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Siga45, Mode=OneWay}"
+                                 Style="{StaticResource FormTextBoxStyle}"
+                                 IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <!-- ══════════ CRE / DDT / JOSH ══════════ -->
+                    <TextBlock Text="▸ CRE / DDT / JOSH" Style="{StaticResource DettaglioSezioneStyle}"/>
+
+                    <!-- Riga: CRE, Data CRE, Josh -->
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="CRE:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Cre, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Data CRE:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.DataCre, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="4">
+                            <TextBlock Text="Josh:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Josh, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Riga: DDT, Data DDT, Pervenuto -->
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="DDT (Documento di Trasporto):" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Ddt, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Data DDT:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.DataDdt, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="4">
+                            <TextBlock Text="Pervenuto:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Pervenuto, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Riga: DDT 2, Data DDT 2, Pervenuto 2 -->
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="DDT 2:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Ddt2, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Data DDT 2:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.DataDdt2, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="4">
+                            <TextBlock Text="Pervenuto 2:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Pervenuto2, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Riga: DDT 3, Data DDT 3, Pervenuto 3 -->
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="DDT 3:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Ddt3, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Data DDT 3:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.DataDdt3, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="4">
+                            <TextBlock Text="Pervenuto 3:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Pervenuto3, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Riga: (vuoto sotto DDT), Data Introduzione, Trasmesso -->
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Data Introduzione:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.DataIntroduzione, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="4">
+                            <TextBlock Text="Trasmesso:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Trasmesso, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- ══════════ FATTURAZIONE ══════════ -->
+                    <TextBlock Text="▸ FATTURAZIONE" Style="{StaticResource DettaglioSezioneStyle}"/>
+
+                    <!-- Riga: Fattura, Data Fattura, Importo Fattura -->
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Fattura:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Fattura, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Data Fattura:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.DataFattura, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="4">
+                            <TextBlock Text="Importo Fattura:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.ImportoFattura, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- ══════════ BDC / COLLAUDO ══════════ -->
+                    <TextBlock Text="▸ BDC / COLLAUDO" Style="{StaticResource DettaglioSezioneStyle}"/>
+
+                    <!-- Riga: BDC, Data BDC, Collaudo -->
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="BDC:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Bdc, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Data BDC:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.DataBdc, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="4">
+                            <TextBlock Text="Collaudo:" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.Collaudo, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- ══════════ ALTRO ══════════ -->
+                    <TextBlock Text="▸ ALTRO" Style="{StaticResource DettaglioSezioneStyle}"/>
+
+                    <!-- Riga: PdC, PdG -->
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="PdC (Piano di Classificazione):" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.PdC, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="PdG (Punto di Contratto):" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Text="{Binding MarsauSelezionato.PdG, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Cartella + Sfoglia -->
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock Text="Cartella:" Style="{StaticResource FormLabelStyle}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Column="0"
+                                     Text="{Binding MarsauSelezionato.Cartella, Mode=OneWay}"
+                                     Style="{StaticResource FormTextBoxStyle}"
+                                     IsReadOnly="True"/>
+
+
+                        </Grid>
+                    </StackPanel>
+
+                    <!-- Note -->
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock Text="Note:" Style="{StaticResource FormLabelStyle}"/>
+                        <TextBox Text="{Binding MarsauSelezionato.Note, Mode=OneWay}"
+                                 Style="{StaticResource FormTextBoxStyle}"
+                                 IsReadOnly="True"
+                                 Height="80"
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto"/>
+                    </StackPanel>
+
+                    <!-- Pulsanti: TRASMISSIONE a sinistra, gli altri a destra -->
+                    <Grid Margin="0,20,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Style="{StaticResource PrimaryButtonStyle}"
+                                Command="{Binding TrasmissioneCommand}"
+                                Padding="20,8"
+                                Margin="0">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="M2,4 L14,4 L14,13 L2,13 Z M2,4 L8,9 L14,4"
+                                      Stroke="#0F2044"
+                                      StrokeThickness="1.6"
+                                      StrokeLineJoin="Round"
+                                      Fill="Transparent"
+                                      Width="16" Height="16"
+                                      Stretch="Uniform"
+                                      Margin="0,0,8,0"/>
+                                <TextBlock Text="TRASMISSIONE" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Style="{StaticResource PrimaryButtonStyle}"
+                                    Command="{Binding OpenCartellaCommand}"
+                                    Padding="20,8"
+                                    Margin="0,0,10,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <Path Data="M2,5 L7,5 L9,7 L14,7 L14,13 L2,13 Z"
+                                          Stroke="#0F2044"
+                                          StrokeThickness="1.6"
+                                          StrokeLineJoin="Round"
+                                          Fill="Transparent"
+                                          Width="16" Height="16"
+                                          Stretch="Uniform"
+                                          Margin="0,0,8,0"/>
+                                    <TextBlock Text="APRI CARTELLA" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource PrimaryButtonStyle}"
+                                    Command="{Binding OpenModificaCommand}"
+                                    Padding="20,8"
+                                    Margin="0,0,10,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <Path Data="M12,2 L16,6 L7,15 L2,16 L3,11 Z M10,4 L14,8 M3,11 L7,15"
+                                          Stroke="#0F2044"
+                                          StrokeThickness="1.6"
+                                          StrokeLineJoin="Round"
+                                          Fill="Transparent"
+                                          Width="16" Height="16"
+                                          Stretch="Uniform"
+                                          Margin="0,0,8,0"/>
+                                    <TextBlock Text="MODIFICA DATI" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource PrimaryButtonStyle}"
+                                    Command="{Binding StampaCommand}"
+                                    Padding="20,8"
+                                    Margin="0">
+                                <StackPanel Orientation="Horizontal">
+                                    <Path Data="M4,2 L12,2 L12,6 L4,6 Z M2,6 L14,6 L14,11 L2,11 Z M4,11 L12,11 L12,15 L4,15 Z"
+                                          Stroke="#0F2044"
+                                          StrokeThickness="1.6"
+                                          StrokeLineJoin="Round"
+                                          Fill="Transparent"
+                                          Width="16" Height="16"
+                                          Stretch="Uniform"
+                                          Margin="0,0,8,0"/>
+                                    <TextBlock Text="STAMPA" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
 
             <!-- ========== FORM INSERIMENTO ========== -->
             <Border x:Name="BorderForm"
-                    Background="{StaticResource NavyDark}"
+                    Grid.Column="1"
+                    Background="#E60F2044"
                     Margin="12"
                     Visibility="{Binding IsFormVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Width="1100" Margin="0,10,0,20">
+                    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" MaxWidth="1000" Margin="16,10,16,20">
 
                         <!-- Titolo form -->
                         <Border Background="{StaticResource NavyMedium}"
@@ -851,7 +1259,7 @@
                                          Text="{Binding CartellaPath}"
                                          Style="{StaticResource FormTextBoxStyle}"
                                          IsReadOnly="True"/>
-                              
+
                             </Grid>
                         </StackPanel>
 

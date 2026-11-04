@@ -12,19 +12,11 @@
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
-     
+
 
         <common:TroncaMarsauConverter x:Key="TroncaMarsauConverter"/>
 
-      
 
-     
-     
-
-        <!-- Campi semi-trasparenti: la foto traspare leggermente -->
-      
-
-       
     </Window.Resources>
 
     <Grid>
@@ -35,7 +27,7 @@
 
         <!-- SFONDO: foto Marina (Images/marina.jpg, Azione di compilazione = Resource) -->
         <Grid.Background>
-            <ImageBrush ImageSource="/IMG/logo_pantano.png"
+            <ImageBrush ImageSource="/IMG/NavePa.jpeg"
                         Stretch="UniformToFill"
                         AlignmentX="Center" AlignmentY="Center"/>
         </Grid.Background>

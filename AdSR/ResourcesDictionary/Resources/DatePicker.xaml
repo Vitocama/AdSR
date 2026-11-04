@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Brush locali al dizionario: non dipendono da RowDark / Gold,
+         che in MarsauView esistono solo in Window.Resources. -->
+    <SolidColorBrush x:Key="FormDatePickerBackground" Color="#162840"/>
+    <SolidColorBrush x:Key="FormDatePickerBorder" Color="#C9A84C"/>
+
+    <Style x:Key="FormDatePickerStyle" TargetType="DatePicker">
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="{StaticResource FormDatePickerBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource FormDatePickerBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="8,6"/>
+        <Setter Property="Height" Value="36"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+</ResourceDictionary>

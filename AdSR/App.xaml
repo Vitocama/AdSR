@@ -17,6 +17,14 @@
                 <ResourceDictionary Source="/ResourcesDictionary/Resources/DatagridDictionary.xaml"/>
                 <ResourceDictionary Source="/ResourcesDictionary/Resources/DockPanelDictionary.xaml"/>
                 <ResourceDictionary Source="/ResourcesDictionary/Resources/TextBoxDictionary.xaml"/>
+                <ResourceDictionary Source="/ResourcesDictionary/Resources/DatePicker.xaml"/>
+                <ResourceDictionary Source="/ResourcesDictionary/Resources/ComboBoxDictionary.xaml"/>
+                <ResourceDictionary Source="/ResourcesDictionary/Resources/RadioButton.xaml"/>
+                <ResourceDictionary Source="/ResourcesDictionary/Resources/ScrollBarDictionary.xaml"/>
+                <ResourceDictionary Source="/ResourcesDictionary/Resources/ScrollViewDictionary.xaml"/>
+                
+                
+                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

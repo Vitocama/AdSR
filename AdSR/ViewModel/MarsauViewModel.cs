@@ -1,10 +1,15 @@
 ﻿using AdSR.Common;
 using AdSR.DatiMarsau;
+using AdSR.ModificaControl;
 using AdSR.Models;
+using AdSR.OpenPDFControl;
 using AdSR.ServiceRepository;
+using AdSR.StampaControl;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -27,7 +32,12 @@ namespace AdSR.MarsauControl
         public ICommand SalvaCommand { get; }
         public ICommand AnnullaCommand { get; }
         public ICommand apriDatiMarsau { get; }
-      
+        public ICommand TrasmissioneCommand { get; }
+        public ICommand OpenCartellaCommand { get; }
+        public ICommand OpenModificaCommand { get; }
+        public ICommand StampaCommand { get; }
+
+        public ICommand HomeCommand { get; }
 
         public string CartellaPath
         {
@@ -54,9 +64,30 @@ namespace AdSR.MarsauControl
             SalvaCommand = new RelayCommand(Salva);
             AnnullaCommand = new RelayCommand(Annulla);
             apriDatiMarsau = new RelayCommand(ApriDatiMarsau);
+            TrasmissioneCommand = new RelayCommand(Trasmissione);
+            OpenCartellaCommand = new RelayCommand(ApriCartella);
+            OpenModificaCommand = new RelayCommand(ApriModifica);
+            StampaCommand = new RelayCommand(Stampa);
+            HomeCommand = new RelayCommand(TornaHome);
         }
 
-        
+        private void TornaHome()
+        {
+            // Se il form di inserimento è aperto, chiede conferma per non perdere i dati
+            if (IsFormVisible)
+            {
+                var risposta = MarinaMessageBox.Show(
+                    "Il form di inserimento è aperto: i dati non salvati andranno persi.\nContinuare?",
+                    "Conferma", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (risposta != MessageBoxResult.Yes)
+                    return;
+            }
+
+            IsFormVisible = false;          // chiude il form di inserimento
+            NuovoMarsau = new Protocolli(); // svuota i campi del form
+            MarsauSelezionato = null;       // nasconde i dettagli e deseleziona la ListBox
+        }
 
         private void ApriDatiMarsau()
         {
@@ -71,6 +102,7 @@ namespace AdSR.MarsauControl
             vm.SetWindow(view);
             vm.SetMarsau(MarsauSelezionato);
             view.DataContext = vm;
+            view.Owner = FinestraAttiva();
 
             view.ShowDialog();
 
@@ -80,8 +112,100 @@ namespace AdSR.MarsauControl
 
         private void RicaricaLista()
         {
+            // Mantiene il record selezionato (chiave: Marsau) dopo il ricaricamento
+            string chiave = MarsauSelezionato?.Marsau;
+
             MarsauLista = new ObservableCollection<Protocolli>(_protocolliRepository.ProtocolliGetAll());
             MarsauFiltratiLista = new ObservableCollection<Protocolli>(MarsauLista);
+
+            if (chiave != null)
+                MarsauSelezionato = MarsauLista.FirstOrDefault(p => p.Marsau == chiave);
+        }
+
+        // Finestra proprietaria per le finestre figlie: quella attiva (MarsauView)
+        private static Window FinestraAttiva()
+        {
+            return Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.IsActive)
+                   ?? Application.Current.MainWindow;
+        }
+
+        private void Stampa()
+        {
+            if (MarsauSelezionato == null)
+                return;
+
+            var stampaWindow = new StampaView(MarsauSelezionato);
+            stampaWindow.Owner = FinestraAttiva();
+            stampaWindow.ShowDialog();
+        }
+
+        private void Trasmissione()
+        {
+            if (MarsauSelezionato == null)
+                return;
+
+            var stampaWindow = new StampaView(MarsauSelezionato, TipoStampa.Trasmissione);
+            stampaWindow.Owner = FinestraAttiva();
+            stampaWindow.ShowDialog();
+        }
+
+        private void ApriCartella()
+        {
+            if (MarsauSelezionato == null)
+                return;
+
+            string cartella = MarsauSelezionato.Cartella;
+
+            if (string.IsNullOrWhiteSpace(cartella))
+            {
+                MarinaMessageBox.Show("Nessun percorso cartella associato a questo protocollo.",
+                    "Attenzione", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (!Directory.Exists(cartella))
+            {
+                MarinaMessageBox.Show($"La cartella non esiste o non è raggiungibile:\n{cartella}",
+                    "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            try
+            {
+                var titolo = new TroncaMarsauConverter()
+                    .Convert(MarsauSelezionato.Marsau, typeof(string), null,
+                             CultureInfo.CurrentCulture)?.ToString();
+
+                var view = new OpenPDFView(cartella, $"Documenti Marsau - {titolo}")
+                {
+                    Owner = FinestraAttiva()
+                };
+                view.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MarinaMessageBox.Show($"Impossibile aprire il visualizzatore documenti:\n{ex.Message}",
+                    "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ApriModifica()
+        {
+            if (MarsauSelezionato == null)
+                return;
+
+            var view = new ModificaView();
+            var vm = new ModificaViewModel(_protocolliRepository);
+
+            vm.SetWindow(view);                 // necessario per chiudere da Salva/Annulla
+            vm.SetMarsau(MarsauSelezionato);    // il VM lavora su una copia
+            view.DataContext = vm;
+            view.Owner = FinestraAttiva();
+            view.ShowDialog();
+
+            // Se si è salvato, l'originale è aggiornato (anche la chiave Marsau):
+            // ricarica la lista mantenendo il record selezionato
+            RicaricaLista();
         }
 
         private void Filter()
